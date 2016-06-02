@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <code>pvnm_testimonials</code>
+    <name>Perfect Testimonials</name>
+    <version>1.0.0</version>
+    <author>p0v1n0m@gmail.com</author>
+    <link>mailto:p0v1n0m@gmail.com</link>
+    <file path="admin/controller/common/menu.php">
+        <operation>
+            <search><![CDATA[
+return $this->load->view('common/menu.tpl', $data);
+            ]]></search>
+            <add position="before"><![CDATA[
+        if ($this->config->get('pvnm_testimonials_status') == 1) {
+            $data['pvnm_testimonials_status'] = $this->language->get('pvnm_testimonials_status');
+
+            $this->language->load('module/pvnm_testimonials');
+
+            $data['heading_testimonials'] = $this->language->get('heading_title');
+            $data['button_testimonials'] = $this->language->get('button_testimonials');
+            $data['button_votes'] = $this->language->get('button_votes');
+            $data['button_settings'] = $this->language->get('button_settings');
+
+            $data['testimonials'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'], 'SSL');
+            $data['votes'] = $this->url->link('module/pvnm_testimonials/votes', 'token=' . $this->session->data['token'], 'SSL');
+            $data['settings'] = $this->url->link('module/pvnm_testimonials', 'token=' . $this->session->data['token'], 'SSL');
+        }
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/common/menu.tpl">
+        <operation>
+            <search><![CDATA[
+<li id="sale"><a class="parent"><i class="fa fa-shopping-cart fa-fw"></i> <span><?php echo $text_sale; ?></span></a>
+            ]]></search>
+            <add position="before"><![CDATA[
+<?php if (isset($pvnm_testimonials_status)) { ?>
+  <li id="testimonials"><a class="parent"><i class="fa fa-star-half-o fa-fw"></i> <span><?php echo $heading_testimonials; ?></span></a>
+    <ul>
+      <li><a href="<?php echo $testimonials; ?>"><?php echo $button_testimonials; ?></a></li>
+      <li><a href="<?php echo $votes; ?>"><?php echo $button_votes; ?></a></li>
+      <li><a href="<?php echo $settings; ?>"><?php echo $button_settings; ?></a></li>
+    </ul>
+  </li>
+<?php } ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/model/checkout/order.php">
+        <operation>
+            <search><![CDATA[
+if ($order_info['order_status_id'] && $order_status_id && $notify) {
+            ]]></search>
+            <add position="before"><![CDATA[
+            if ($order_info['order_status_id'] && $order_status_id && in_array($order_status_id, $this->config->get('pvnm_testimonials_order_statuses')) && $this->config->get('pvnm_testimonials_customer_motivate') == 1) {
+                $testimonials_name = $this->config->get('pvnm_testimonials_description');
+
+                $input = array(
+                    '{store_name}',
+                    '{store_url}',
+                    '{store_logo}',
+                    '{customer}',
+                    '{testimonials}'
+                );
+
+                $output = array(
+                    'store_name'    => $this->config->get('config_name'),
+                    'store_url'     => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+                    'store_logo'    => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+                    'customer'      => $customer_info['firstname'] . ' ' . $customer_info['lastname'],
+                    'testimonials'  => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
+                );
+
+                $customer_motivate_subject = $this->config->get('pvnm_testimonials_customer_motivate_subject');
+                $customer_motivate_message = $this->config->get('pvnm_testimonials_customer_motivate_message');
+
+                $customer_motivate_subject = html_entity_decode(trim(str_replace($input, $output, $customer_motivate_subject[(int)$this->config->get('config_language_id')]['subject'])));
+                $customer_motivate_message = html_entity_decode(str_replace($input, $output, $customer_motivate_message[(int)$this->config->get('config_language_id')]['message']));
+
+                $html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">' . "\n";
+                $html .= '<html>' . "\n";
+                $html .= '  <head>' . "\n";
+                $html .= '    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">' . "\n";
+                $html .= '    <title>' . $customer_motivate_subject . '</title>' . "\n";
+                $html .= '  </head>' . "\n";
+                $html .= '  <body>' . $customer_motivate_message . '</body>' . "\n";
+                $html .= '</html>' . "\n";
+
+                $mail = new Mail();
+                $mail->protocol = $this->config->get('config_mail_protocol');
+                $mail->parameter = $this->config->get('config_mail_parameter');
+                $mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+                $mail->smtp_username = $this->config->get('config_mail_smtp_username');
+                $mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+                $mail->smtp_port = $this->config->get('config_mail_smtp_port');
+                $mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+                $mail->setTo($order_info['email']);
+                $mail->setFrom($this->config->get('pvnm_testimonials_email'));
+                $mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+                $mail->setSubject(html_entity_decode($customer_motivate_subject, ENT_QUOTES, 'UTF-8'));
+                $mail->setHtml($html);
+                $mail->send();
+            }
+            ]]></add>
+        </operation>
+    </file>
+</modification>
