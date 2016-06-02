@@ -29,26 +29,26 @@ OpenCart 2.1.x
 MIT
 
 #### Screenshots
-![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/01.png)
+![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/01.jpg)
 
-![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/02.png)
+![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/02.jpg)
 
-![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/03.png)
+![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/03.jpg)
 
-![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/04.png)
+![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/04.jpg)
 
-![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/05.png)
+![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/05.jpg)
 
-![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/06.png)
+![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/06.jpg)
 
-![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/07.png)
+![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/07.jpg)
 
-![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/08.png)
+![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/08.jpg)
 
-![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/09.png)
+![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/09.jpg)
 
-![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/10.png)
+![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/10.jpg)
 
-![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/11.png)
+![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/11.jpg)
 
-![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/12.png)
+![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/12.jpg)
