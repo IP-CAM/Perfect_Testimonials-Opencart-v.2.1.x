@@ -27,6 +27,7 @@ $_['text_empty']   			 = 'No testimonials.';
 $_['text_error'] 			 = 'Page not found.';
 $_['text_success']  		 = 'Thanks for your testimonial.';
 $_['text_success_vote']  	 = 'Your vote has been accepted.';
+$_['text_testimonials']   	 = 'All testimonials';
 
 // Errors
 $_['error_rating']     		 = 'Store Rating is required!';

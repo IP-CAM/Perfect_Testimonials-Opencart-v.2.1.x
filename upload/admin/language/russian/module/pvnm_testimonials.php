@@ -38,6 +38,7 @@ $_['text_testimonials']       = 'Ссылка на отзывы';
 $_['button_testimonials']     = 'Отзывы';
 $_['button_votes']            = 'Голоса';
 $_['button_settings']         = 'Настройки';
+$_['button_widget']        	  = 'Виджет';
 $_['button_delete']           = 'Удалить';
 $_['button_edit'] 			  = 'Изменить';
 $_['button_filter'] 		  = 'Фильтр';

@@ -9,6 +9,7 @@ Module a real customer testimonials.
 * Display Order Info in Testimonial.
 * Multilingual Page Meta.
 * Customize Email Notifications.
+* Widget Latest Testimonials and Store Rating
 * And more...
 
 #### Compatibility
@@ -52,3 +53,7 @@ MIT
 ![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/11.jpg)
 
 ![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/12.jpg)
+
+![Back-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/13.jpg)
+
+![Front-end Demo](https://github.com/p0v1n0m/opencart_perfect_testimonials/blob/master/screenshots/14.jpg)

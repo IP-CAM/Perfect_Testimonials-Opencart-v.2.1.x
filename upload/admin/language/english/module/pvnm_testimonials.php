@@ -38,6 +38,7 @@ $_['text_testimonials']       = 'Perfect Testimonials url';
 $_['button_testimonials']     = 'Testimonials';
 $_['button_votes']            = 'Votes';
 $_['button_settings']         = 'Settings';
+$_['button_widget']        	  = 'Widget';
 $_['button_delete']           = 'Delete';
 $_['button_edit'] 			  = 'Edit';
 $_['button_filter'] 		  = 'Filter';

@@ -27,6 +27,7 @@ $_['text_empty']   			 = 'Нет отзывов.';
 $_['text_error'] 			 = 'Страница не найдена.';
 $_['text_success']  		 = 'Спасибо за ваш отзыв.';
 $_['text_success_vote']  	 = 'Ваш голос принят.';
+$_['text_testimonials']   	 = 'Все отзывы';
 
 // Errors
 $_['error_rating']     		 = 'Поставьте магазину оценку';

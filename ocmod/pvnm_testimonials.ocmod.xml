@@ -20,10 +20,12 @@ return $this->load->view('common/menu.tpl', $data);
             $data['button_testimonials'] = $this->language->get('button_testimonials');
             $data['button_votes'] = $this->language->get('button_votes');
             $data['button_settings'] = $this->language->get('button_settings');
+            $data['button_widget'] = $this->language->get('button_widget');
 
             $data['testimonials'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'], 'SSL');
             $data['votes'] = $this->url->link('module/pvnm_testimonials/votes', 'token=' . $this->session->data['token'], 'SSL');
             $data['settings'] = $this->url->link('module/pvnm_testimonials', 'token=' . $this->session->data['token'], 'SSL');
+            $data['widget'] = $this->url->link('module/pvnm_testimonials_widget', 'token=' . $this->session->data['token'], 'SSL');
         }
             ]]></add>
         </operation>
@@ -40,6 +42,7 @@ return $this->load->view('common/menu.tpl', $data);
       <li><a href="<?php echo $testimonials; ?>"><?php echo $button_testimonials; ?></a></li>
       <li><a href="<?php echo $votes; ?>"><?php echo $button_votes; ?></a></li>
       <li><a href="<?php echo $settings; ?>"><?php echo $button_settings; ?></a></li>
+      <li><a href="<?php echo $widget; ?>"><?php echo $button_widget; ?></a></li>
     </ul>
   </li>
 <?php } ?>

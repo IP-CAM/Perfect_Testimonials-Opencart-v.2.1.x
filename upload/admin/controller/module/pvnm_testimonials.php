@@ -29,6 +29,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['button_testimonials'] = $this->language->get('button_testimonials');
 		$data['button_votes'] = $this->language->get('button_votes');
 		$data['button_settings'] = $this->language->get('button_settings');
+		$data['button_widget'] = $this->language->get('button_widget');
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['tab_settings'] = $this->language->get('tab_settings');
@@ -119,6 +120,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['testimonials'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'], 'SSL');
 		$data['votes'] = $this->url->link('module/pvnm_testimonials/votes', 'token=' . $this->session->data['token'], 'SSL');
 		$data['settings'] = $this->url->link('module/pvnm_testimonials', 'token=' . $this->session->data['token'], 'SSL');
+		$data['widget'] = $this->url->link('module/pvnm_testimonials_widget', 'token=' . $this->session->data['token'], 'SSL');
 		$data['action'] = $this->url->link('module/pvnm_testimonials', 'token=' . $this->session->data['token'], 'SSL');
 		$data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 
@@ -490,6 +492,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['testimonials'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'], 'SSL');
 		$data['votes'] = $this->url->link('module/pvnm_testimonials/votes', 'token=' . $this->session->data['token'], 'SSL');
 		$data['settings'] = $this->url->link('module/pvnm_testimonials', 'token=' . $this->session->data['token'], 'SSL');
+		$data['widget'] = $this->url->link('module/pvnm_testimonials_widget', 'token=' . $this->session->data['token'], 'SSL');
 		$data['delete'] = $this->url->link('module/pvnm_testimonials/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		$data['pvnm_testimonials'] = array();
@@ -532,6 +535,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['button_testimonials'] = $this->language->get('button_testimonials');
 		$data['button_votes'] = $this->language->get('button_votes');
 		$data['button_settings'] = $this->language->get('button_settings');
+		$data['button_widget'] = $this->language->get('button_widget');
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_edit'] = $this->language->get('button_edit');
 		$data['button_filter'] = $this->language->get('button_filter');
@@ -743,6 +747,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['button_testimonials'] = $this->language->get('button_testimonials');
 		$data['button_votes'] = $this->language->get('button_votes');
 		$data['button_settings'] = $this->language->get('button_settings');
+		$data['button_widget'] = $this->language->get('button_widget');
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['entry_customer'] = $this->language->get('entry_customer');
@@ -802,6 +807,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['testimonials'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'], 'SSL');
 		$data['votes'] = $this->url->link('module/pvnm_testimonials/votes', 'token=' . $this->session->data['token'], 'SSL');
 		$data['settings'] = $this->url->link('module/pvnm_testimonials', 'token=' . $this->session->data['token'], 'SSL');
+		$data['widget'] = $this->url->link('module/pvnm_testimonials_widget', 'token=' . $this->session->data['token'], 'SSL');
 		$data['cancel'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		if (isset($this->request->get['testimonial_id'])) {
@@ -1022,6 +1028,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['testimonials'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'], 'SSL');
 		$data['votes'] = $this->url->link('module/pvnm_testimonials/votes', 'token=' . $this->session->data['token'], 'SSL');
 		$data['settings'] = $this->url->link('module/pvnm_testimonials', 'token=' . $this->session->data['token'], 'SSL');
+		$data['widget'] = $this->url->link('module/pvnm_testimonials_widget', 'token=' . $this->session->data['token'], 'SSL');
 		$data['delete'] = $this->url->link('module/pvnm_testimonials/deleteVotes', 'token=' . $this->session->data['token'] . $url, 'SSL');
 
 		$data['pvnm_votes'] = array();
@@ -1061,6 +1068,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['button_testimonials'] = $this->language->get('button_testimonials');
 		$data['button_votes'] = $this->language->get('button_votes');
 		$data['button_settings'] = $this->language->get('button_settings');
+		$data['button_widget'] = $this->language->get('button_widget');
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_edit'] = $this->language->get('button_edit');
 		$data['button_filter'] = $this->language->get('button_filter');
