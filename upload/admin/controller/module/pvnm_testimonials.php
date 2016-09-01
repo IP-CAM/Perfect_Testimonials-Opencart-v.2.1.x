@@ -2,10 +2,10 @@
 class ControllerModulePvnmTestimonials extends Controller {
 	private $error = array();
 
-    public function index() {
-        $this->load->language('module/pvnm_testimonials');
+	public function index() {
+		$this->load->language('module/pvnm_testimonials');
 
-        $this->document->setTitle($this->language->get('heading_title'));
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('module/pvnm_testimonials');
 		$this->load->model('setting/setting');
@@ -86,7 +86,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['entry_message'] = $this->language->get('entry_message');
 		$data['entry_macros'] = $this->language->get('entry_macros');
 
- 		if (isset($this->error['warning'])) {
+		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
 			$data['error_warning'] = '';
@@ -100,17 +100,17 @@ class ControllerModulePvnmTestimonials extends Controller {
 			$data['success'] = '';
 		}
 
-  		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = array();
 
-   		$data['breadcrumbs'][] = array(
-       		'text' => $this->language->get('text_home'),
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], 'SSL')
-   		);
+		);
 
-   		$data['breadcrumbs'][] = array(
-       		'text' => $this->language->get('text_module'),
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('text_module'),
 			'href' => $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL')
-   		);
+		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
@@ -376,7 +376,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 
 		$this->response->setOutput($this->load->view('module/pvnm_testimonials.tpl', $data));
-    }
+	}
 
 	public function testimonials() {
 		$this->load->language('module/pvnm_testimonials');
@@ -500,26 +500,26 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$filter_data = array(
 			'filter_date_added' => $filter_date_added,
 			'filter_customer'   => $filter_customer,
-			'filter_rating'   	=> $filter_rating,
-			'filter_status'   	=> $filter_status,
-			'filter_answer'   	=> $filter_answer,
-			'sort'            	=> $sort,
-			'order'           	=> $order,
-			'start'           	=> ($page - 1) * $this->config->get('config_limit_admin'),
-			'limit'           	=> $this->config->get('config_limit_admin')
+			'filter_rating'     => $filter_rating,
+			'filter_status'     => $filter_status,
+			'filter_answer'     => $filter_answer,
+			'sort'              => $sort,
+			'order'             => $order,
+			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit'             => $this->config->get('config_limit_admin')
 		);
 
 		$testimonials_total = $this->model_module_pvnm_testimonials->getTestimonialsTotal($filter_data);
 
 		$results = $this->model_module_pvnm_testimonials->getTestimonials($filter_data);
  
-    	foreach ($results as $result) {
+		foreach ($results as $result) {
 			$data['pvnm_testimonials'][] = array(
 				'testimonial_id'  => $result['testimonial_id'],
 				'customer_name'   => $result['customer'],
 				'customer_href'   => $this->url->link('customer/customer/edit', 'token=' . $this->session->data['token'] . '&customer_id=' . $result['customer_id'], 'SSL'),
-				'order_href'  	  => $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'], 'SSL'),
-				'order_id'  	  => $result['order_id'],
+				'order_href'      => $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'], 'SSL'),
+				'order_id'        => $result['order_id'],
 				'city'            => $result['city'],
 				'shipping'        => $result['shipping'],
 				'rating'          => $result['rating'],
@@ -527,7 +527,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 				'answer'          => $result['answer'],
 				'date_added'      => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'selected'        => isset($this->request->post['selected']) && in_array($result['testimonial_id'], $this->request->post['selected']),
-				'href'          => $this->url->link('module/pvnm_testimonials/edit', 'token=' . $this->session->data['token'] . '&testimonial_id=' . $result['testimonial_id'] . $url, 'SSL')
+				'href'            => $this->url->link('module/pvnm_testimonials/edit', 'token=' . $this->session->data['token'] . '&testimonial_id=' . $result['testimonial_id'] . $url, 'SSL')
 			);
 		}
 
@@ -821,7 +821,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 
 		$data['token'] = $this->session->data['token'];
 
-      	$testimonial_info = $this->model_module_pvnm_testimonials->getTestimonial($this->request->get['testimonial_id']);
+		$testimonial_info = $this->model_module_pvnm_testimonials->getTestimonial($this->request->get['testimonial_id']);
 
 		if (!empty($testimonial_info)) {
 			$data['customer_href'] = $this->url->link('customer/customer/edit', 'token=' . $this->session->data['token'] . '&customer_id=' . $testimonial_info['customer_id'], 'SSL');
@@ -1036,24 +1036,24 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$filter_data = array(
 			'filter_date_added' => $filter_date_added,
 			'filter_customer'   => $filter_customer,
-			'filter_ip'   		=> $filter_ip,
-			'filter_status'   	=> $filter_status,
-			'filter_type'   	=> $filter_type,
-			'sort'            	=> $sort,
-			'order'           	=> $order,
-			'start'           	=> ($page - 1) * $this->config->get('config_limit_admin'),
-			'limit'           	=> $this->config->get('config_limit_admin')
+			'filter_ip'         => $filter_ip,
+			'filter_status'     => $filter_status,
+			'filter_type'       => $filter_type,
+			'sort'              => $sort,
+			'order'             => $order,
+			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit'             => $this->config->get('config_limit_admin')
 		);
 
 		$votes_total = $this->model_module_pvnm_testimonials->getVotesTotal($filter_data);
 
 		$results = $this->model_module_pvnm_testimonials->getVotes($filter_data);
  
-    	foreach ($results as $result) {
+		foreach ($results as $result) {
 			$data['pvnm_votes'][] = array(
-				'vote_id'  		   => $result['vote_id'],
+				'vote_id'          => $result['vote_id'],
 				'date_added'       => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'type'  		   => $result['type'],
+				'type'             => $result['type'],
 				'testimonial_id'   => $result['testimonial_id'],
 				'testimonial_href' => $this->url->link('module/pvnm_testimonials/edit', 'token=' . $this->session->data['token'] . '&testimonial_id=' . $result['testimonial_id'], 'SSL'),
 				'customer_id'      => $result['customer_id'],
@@ -1262,23 +1262,23 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-    protected function validate_modify() {
-        if (!$this->user->hasPermission('modify', 'module/pvnm_testimonials')) {
-            $this->error['warning'] = $this->language->get('error_permission');
-        }
+	protected function validate_modify() {
+		if (!$this->user->hasPermission('modify', 'module/pvnm_testimonials')) {
+			$this->error['warning'] = $this->language->get('error_permission');
+		}
 
-        return !$this->error;
-    }
+		return !$this->error;
+	}
 
-    public function install() {
-        $this->load->model('module/pvnm_testimonials');
+	public function install() {
+		$this->load->model('module/pvnm_testimonials');
 
-        $this->model_module_pvnm_testimonials->install();
-    }
+		$this->model_module_pvnm_testimonials->install();
+	}
 
-    public function uninstall() {
-        $this->load->model('module/pvnm_testimonials');
+	public function uninstall() {
+		$this->load->model('module/pvnm_testimonials');
 
-        $this->model_module_pvnm_testimonials->uninstall();
-    }
+		$this->model_module_pvnm_testimonials->uninstall();
+	}
 }

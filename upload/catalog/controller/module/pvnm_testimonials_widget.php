@@ -8,14 +8,14 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 
 			$this->document->addStyle('catalog/view/javascript/pvnm_testimonials/testimonials.css');
 
-	    	$data['testimonials'] = array();
-	    	$data['rating_stars'] = 0;
-	    	$data['rating_text'] = '';
-	        $data['href'] = $this->url->link('information/pvnm_testimonials');
+			$data['testimonials'] = array();
+			$data['rating_stars'] = 0;
+			$data['rating_text'] = '';
+			$data['href'] = $this->url->link('information/pvnm_testimonials');
 
-	        $testimonials = $this->model_module_pvnm_testimonials->getTestimonialsTotal();
+			$testimonials = $this->model_module_pvnm_testimonials->getTestimonialsTotal();
 
-	        if ($setting['rating_status'] == 1) {
+			if ($setting['rating_status'] == 1) {
 				$data['text_rating'] = $this->language->get('text_rating');
 
 				if ($testimonials['total'] > 0) {
@@ -37,7 +37,7 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 				}
 			}
 
-	        if ($setting['testimonials_status'] == 1) {
+			if ($setting['testimonials_status'] == 1) {
 				$data['heading_title'] = $setting['testimonials_title'][$this->config->get('config_language_id')];
 				$data['text_plus'] = $this->language->get('text_plus');
 				$data['text_minus'] = $this->language->get('text_minus');
@@ -48,11 +48,11 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 				$data['comment_status'] = $this->config->get('pvnm_testimonials_comment_status');
 
 				$filter_data = array(
-					'rating'    		 => '',
-					'sort'               => 't.date_added',
-					'order'              => 'DESC',
-					'start'              => 0,
-					'limit'              => $setting['testimonials_limit']
+					'rating' => '',
+					'sort'   => 't.date_added',
+					'order'  => 'DESC',
+					'start'  => 0,
+					'limit'  => $setting['testimonials_limit']
 				);
 
 				$results = $this->model_module_pvnm_testimonials->getTestimonials($filter_data);
@@ -65,12 +65,12 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 					}
 
 					$data['testimonials'][] = array(
-						'testimonial_id'	=> (int)$result['testimonial_id'],
-						'author'        	=> $author,
-						'rating'     	    => (int)$result['rating'],
-						'plus' 				=> html_entity_decode($result['plus'], ENT_QUOTES, 'UTF-8'),
-						'minus'				=> html_entity_decode($result['minus'], ENT_QUOTES, 'UTF-8'),
-						'comment'			=> html_entity_decode($result['comment'], ENT_QUOTES, 'UTF-8')
+						'testimonial_id' => (int)$result['testimonial_id'],
+						'author'         => $author,
+						'rating'         => (int)$result['rating'],
+						'plus'           => html_entity_decode($result['plus'], ENT_QUOTES, 'UTF-8'),
+						'minus'          => html_entity_decode($result['minus'], ENT_QUOTES, 'UTF-8'),
+						'comment'        => html_entity_decode($result['comment'], ENT_QUOTES, 'UTF-8')
 					);
 				}
 			}

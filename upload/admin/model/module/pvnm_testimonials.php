@@ -120,32 +120,32 @@ class ModelModulePvnmTestimonials extends Model {
 	}
 
 	public function editTestimonial($data, $testimonial_id) {
-        $query = $this->db->query("SELECT t.status, t.answer, c.email, CONCAT(c.firstname, ' ', c.lastname) AS customer FROM `" . DB_PREFIX . "pvnm_testimonials` t LEFT JOIN `" . DB_PREFIX . "customer` c ON (t.customer_id = c.customer_id) WHERE t.testimonial_id = '" . (int)$testimonial_id . "'");
+		$query = $this->db->query("SELECT t.status, t.answer, c.email, CONCAT(c.firstname, ' ', c.lastname) AS customer FROM `" . DB_PREFIX . "pvnm_testimonials` t LEFT JOIN `" . DB_PREFIX . "customer` c ON (t.customer_id = c.customer_id) WHERE t.testimonial_id = '" . (int)$testimonial_id . "'");
 
-        if ($this->config->get('pvnm_testimonials_alert_publish') == 1 && $query->row['status'] == 0) {
-            $testimonials_name = $this->config->get('pvnm_testimonials_description');
+		if ($this->config->get('pvnm_testimonials_alert_publish') == 1 && $query->row['status'] == 0) {
+			$testimonials_name = $this->config->get('pvnm_testimonials_description');
 
-            $input = array(
-                '{store_name}',
-                '{store_url}',
-                '{store_logo}',
-                '{customer}',
-                '{testimonials}'
-            );
+			$input = array(
+				'{store_name}',
+				'{store_url}',
+				'{store_logo}',
+				'{customer}',
+				'{testimonials}'
+			);
 
-		    $output = array(
-				'store_name'	=> $this->config->get('config_name'),
-				'store_url'     => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'	=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'		=> $query->row['customer'],
-                'testimonials'  => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
-	        );
+			$output = array(
+				'store_name'   => $this->config->get('config_name'),
+				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'     => $query->row['customer'],
+				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
+			);
 
-		    $alert_publish_subject = $this->config->get('pvnm_testimonials_alert_publish_subject');
-		    $alert_publish_message = $this->config->get('pvnm_testimonials_alert_publish_message');
+			$alert_publish_subject = $this->config->get('pvnm_testimonials_alert_publish_subject');
+			$alert_publish_message = $this->config->get('pvnm_testimonials_alert_publish_message');
 
-            $alert_publish_subject = html_entity_decode(trim(str_replace($input, $output, $alert_publish_subject[(int)$this->config->get('config_language_id')]['subject'])));
-            $alert_publish_message = html_entity_decode(str_replace($input, $output, $alert_publish_message[(int)$this->config->get('config_language_id')]['message']));
+			$alert_publish_subject = html_entity_decode(trim(str_replace($input, $output, $alert_publish_subject[(int)$this->config->get('config_language_id')]['subject'])));
+			$alert_publish_message = html_entity_decode(str_replace($input, $output, $alert_publish_message[(int)$this->config->get('config_language_id')]['message']));
 
 			$html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">' . "\n";
 			$html .= '<html>' . "\n";
@@ -173,30 +173,30 @@ class ModelModulePvnmTestimonials extends Model {
 			$mail->send();
 		}
 
-        if ($this->config->get('pvnm_testimonials_alert_response') == 1 && $query->row['answer'] == '' && $data['answer'] != '') {
-            $testimonials_name = $this->config->get('pvnm_testimonials_description');
+		if ($this->config->get('pvnm_testimonials_alert_response') == 1 && $query->row['answer'] == '' && $data['answer'] != '') {
+			$testimonials_name = $this->config->get('pvnm_testimonials_description');
 
-            $input = array(
-                '{store_name}',
-                '{store_url}',
-                '{store_logo}',
-                '{customer}',
-                '{testimonials}'
-            );
+			$input = array(
+				'{store_name}',
+				'{store_url}',
+				'{store_logo}',
+				'{customer}',
+				'{testimonials}'
+			);
 
-		    $output = array(
-				'store_name'	=> $this->config->get('config_name'),
-				'store_url'     => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'	=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'		=> $query->row['customer'],
-                'testimonials'  => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
-	        );
+			$output = array(
+				'store_name'   => $this->config->get('config_name'),
+				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'     => $query->row['customer'],
+				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
+			);
 
-		    $alert_response_subject = $this->config->get('pvnm_testimonials_alert_response_subject');
-		    $alert_response_message = $this->config->get('pvnm_testimonials_alert_response_message');
+			$alert_response_subject = $this->config->get('pvnm_testimonials_alert_response_subject');
+			$alert_response_message = $this->config->get('pvnm_testimonials_alert_response_message');
 
-            $alert_response_subject = html_entity_decode(trim(str_replace($input, $output, $alert_response_subject[(int)$this->config->get('config_language_id')]['subject'])));
-            $alert_response_message = html_entity_decode(str_replace($input, $output, $alert_response_message[(int)$this->config->get('config_language_id')]['message']));
+			$alert_response_subject = html_entity_decode(trim(str_replace($input, $output, $alert_response_subject[(int)$this->config->get('config_language_id')]['subject'])));
+			$alert_response_message = html_entity_decode(str_replace($input, $output, $alert_response_message[(int)$this->config->get('config_language_id')]['message']));
 
 			$html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">' . "\n";
 			$html .= '<html>' . "\n";
@@ -339,7 +339,7 @@ class ModelModulePvnmTestimonials extends Model {
 			rating int(1) NOT NULL, 
 			comment text, 
 			plus text, 
-		    minus text, 
+			minus text, 
 			status tinyint(1) NOT NULL default '0', 
 			date_added datetime NOT NULL default '0000-00-00 00:00:00', 
 			vote int(11) NOT NULL default '0', 

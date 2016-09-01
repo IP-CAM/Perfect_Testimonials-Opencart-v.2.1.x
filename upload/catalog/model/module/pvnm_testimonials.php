@@ -67,30 +67,30 @@ class ModelModulePvnmTestimonials extends Model {
 	public function addTestimonial($data = array()) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "pvnm_testimonials SET customer_id = '" . (int)$data['customer_id'] . "', order_id = '" . (int)$data['order_id'] . "', city = '" .  $this->db->escape($data['city']) . "', shipping = '" . $this->db->escape($data['shipping']) . "', rating = '" . (int)$data['rating'] . "', comment = '" .  $this->db->escape($data['comment']) . "', plus = '" .  $this->db->escape($data['plus']) . "', minus = '" .  $this->db->escape($data['minus']) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
 
-        if ($this->config->get('pvnm_testimonials_alert_admin') == 1) {
-            $testimonials_name = $this->config->get('pvnm_testimonials_description');
+		if ($this->config->get('pvnm_testimonials_alert_admin') == 1) {
+			$testimonials_name = $this->config->get('pvnm_testimonials_description');
 
-            $input = array(
-                '{store_name}',
-                '{store_url}',
-                '{store_logo}',
-                '{customer}',
-                '{testimonials}'
-            );
+			$input = array(
+				'{store_name}',
+				'{store_url}',
+				'{store_logo}',
+				'{customer}',
+				'{testimonials}'
+			);
 
-		    $output = array(
-				'store_name'	=> $this->config->get('config_name'),
-				'store_url'     => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'	=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'		=> $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
-                'testimonials'  => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
-	        );
+			$output = array(
+				'store_name'   => $this->config->get('config_name'),
+				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'     => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
+				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
+			);
 
-		    $alert_admin_subject = $this->config->get('pvnm_testimonials_alert_admin_subject');
-		    $alert_admin_message = $this->config->get('pvnm_testimonials_alert_admin_message');
+			$alert_admin_subject = $this->config->get('pvnm_testimonials_alert_admin_subject');
+			$alert_admin_message = $this->config->get('pvnm_testimonials_alert_admin_message');
 
-            $alert_admin_subject = html_entity_decode(trim(str_replace($input, $output, $alert_admin_subject[(int)$this->config->get('config_language_id')]['subject'])));
-            $alert_admin_message = html_entity_decode(str_replace($input, $output, $alert_admin_message[(int)$this->config->get('config_language_id')]['message']));
+			$alert_admin_subject = html_entity_decode(trim(str_replace($input, $output, $alert_admin_subject[(int)$this->config->get('config_language_id')]['subject'])));
+			$alert_admin_message = html_entity_decode(str_replace($input, $output, $alert_admin_message[(int)$this->config->get('config_language_id')]['message']));
 
 			$html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">' . "\n";
 			$html .= '<html>' . "\n";
@@ -118,30 +118,30 @@ class ModelModulePvnmTestimonials extends Model {
 			$mail->send();
 		}
 
-        if ($this->config->get('pvnm_testimonials_customer_thanks') == 1) {
-            $testimonials_name = $this->config->get('pvnm_testimonials_description');
+		if ($this->config->get('pvnm_testimonials_customer_thanks') == 1) {
+			$testimonials_name = $this->config->get('pvnm_testimonials_description');
 
-            $input = array(
-                '{store_name}',
-                '{store_url}',
-                '{store_logo}',
-                '{customer}',
-                '{testimonials}'
-            );
+			$input = array(
+				'{store_name}',
+				'{store_url}',
+				'{store_logo}',
+				'{customer}',
+				'{testimonials}'
+			);
 
-		    $output = array(
-				'store_name'	=> $this->config->get('config_name'),
-				'store_url'     => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'	=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'		=> $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
-                'testimonials'  => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
-	        );
+			$output = array(
+				'store_name'   => $this->config->get('config_name'),
+				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'     => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
+				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
+			);
 
-		    $customer_thanks_subject = $this->config->get('pvnm_testimonials_customer_thanks_subject');
-		    $customer_thanks_message = $this->config->get('pvnm_testimonials_customer_thanks_message');
+			$customer_thanks_subject = $this->config->get('pvnm_testimonials_customer_thanks_subject');
+			$customer_thanks_message = $this->config->get('pvnm_testimonials_customer_thanks_message');
 
-            $customer_thanks_subject = html_entity_decode(trim(str_replace($input, $output, $customer_thanks_subject[(int)$this->config->get('config_language_id')]['subject'])));
-            $customer_thanks_message = html_entity_decode(str_replace($input, $output, $customer_thanks_message[(int)$this->config->get('config_language_id')]['message']));
+			$customer_thanks_subject = html_entity_decode(trim(str_replace($input, $output, $customer_thanks_subject[(int)$this->config->get('config_language_id')]['subject'])));
+			$customer_thanks_message = html_entity_decode(str_replace($input, $output, $customer_thanks_message[(int)$this->config->get('config_language_id')]['message']));
 
 			$html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">' . "\n";
 			$html .= '<html>' . "\n";
@@ -169,30 +169,30 @@ class ModelModulePvnmTestimonials extends Model {
 			$mail->send();
 		}
 
-        if ($this->config->get('pvnm_testimonials_alert_publish') == 1 && $this->config->get('pvnm_testimonials_approval') == 0) {
-            $testimonials_name = $this->config->get('pvnm_testimonials_description');
+		if ($this->config->get('pvnm_testimonials_alert_publish') == 1 && $this->config->get('pvnm_testimonials_approval') == 0) {
+			$testimonials_name = $this->config->get('pvnm_testimonials_description');
 
-            $input = array(
-                '{store_name}',
-                '{store_url}',
-                '{store_logo}',
-                '{customer}',
-                '{testimonials}'
-            );
+			$input = array(
+				'{store_name}',
+				'{store_url}',
+				'{store_logo}',
+				'{customer}',
+				'{testimonials}'
+			);
 
-		    $output = array(
-				'store_name'	=> $this->config->get('config_name'),
-				'store_url'     => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'	=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'		=> $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
-                'testimonials'  => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
-	        );
+			$output = array(
+				'store_name'   => $this->config->get('config_name'),
+				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'     => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
+				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
+			);
 
-		    $alert_publish_subject = $this->config->get('pvnm_testimonials_alert_publish_subject');
-		    $alert_publish_message = $this->config->get('pvnm_testimonials_alert_publish_message');
+			$alert_publish_subject = $this->config->get('pvnm_testimonials_alert_publish_subject');
+			$alert_publish_message = $this->config->get('pvnm_testimonials_alert_publish_message');
 
-            $alert_publish_subject = html_entity_decode(trim(str_replace($input, $output, $alert_publish_subject[(int)$this->config->get('config_language_id')]['subject'])));
-            $alert_publish_message = html_entity_decode(str_replace($input, $output, $alert_publish_message[(int)$this->config->get('config_language_id')]['message']));
+			$alert_publish_subject = html_entity_decode(trim(str_replace($input, $output, $alert_publish_subject[(int)$this->config->get('config_language_id')]['subject'])));
+			$alert_publish_message = html_entity_decode(str_replace($input, $output, $alert_publish_message[(int)$this->config->get('config_language_id')]['message']));
 
 			$html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">' . "\n";
 			$html .= '<html>' . "\n";

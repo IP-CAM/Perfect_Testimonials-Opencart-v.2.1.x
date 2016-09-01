@@ -20,16 +20,16 @@
 <div class="row testimonial-item">
 	<div class="col-md-12">
 	  <div class="row">
-	    <div class="col-xs-6 testimonial-height">
-	    	<span class="store-customer-name"><i class="fa fa-user fa-fw"></i> <?php echo $testimonial['author']; ?></span>
+		<div class="col-xs-6 testimonial-height">
+			<span class="store-customer-name"><i class="fa fa-user fa-fw"></i> <?php echo $testimonial['author']; ?></span>
 		</div>
-	    <div class="col-xs-6 text-right testimonial-height">
+		<div class="col-xs-6 text-right testimonial-height">
 			<span class="testimonial-rating-stars"><span style="width: <?php echo $testimonial['rating'] * 19; ?>px;"></span></span>
 		</div>
 	  </div>
 	  <br>
 	  <div class="row">
-	    <div class="col-md-12">
+		<div class="col-md-12">
 		  <?php if ($pluses_status > 0) { ?>
 			<p><strong><?php echo $text_plus; ?></strong> <?php echo $testimonial['plus']; ?></p>
 		  <?php } ?>
