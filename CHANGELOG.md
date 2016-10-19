@@ -1,5 +1,8 @@
 # Changelog
 
+#### 1.2.1
+- Update jQuery Raty
+
 #### 1.2.0
 - Code refactoring
 - Added caching to widget

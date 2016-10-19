@@ -2,7 +2,7 @@
 <modification>
 	<code>pvnm_testimonials</code>
 	<name>Perfect Testimonials</name>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<author>p0v1n0m@gmail.com</author>
 	<link>mailto:p0v1n0m@gmail.com</link>
 	<file path="admin/controller/common/menu.php">
