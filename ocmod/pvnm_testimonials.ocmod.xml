@@ -2,7 +2,7 @@
 <modification>
 	<code>pvnm_testimonials</code>
 	<name>Perfect Testimonials</name>
-	<version>1.0.0</version>
+	<version>1.2.0</version>
 	<author>p0v1n0m@gmail.com</author>
 	<link>mailto:p0v1n0m@gmail.com</link>
 	<file path="admin/controller/common/menu.php">
@@ -49,7 +49,70 @@ return $this->load->view('common/menu.tpl', $data);
 			]]></add>
 		</operation>
 	</file>
-	<file path="catalog/model/checkout/order.php">
+	<file path="admin/controller/common/header.php">
+        <operation>
+            <search><![CDATA[
+$data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
+            ]]></search>
+            <add position="after"><![CDATA[
+            if ($this->config->get('pvnm_testimonials_informer')) {
+                $this->load->language('module/pvnm_testimonials');
+
+                $data['text_info_t'] = $this->language->get('text_info_t');
+                $data['text_info_t_all'] = $this->language->get('text_info_t_all');
+                $data['text_info_t_unanswered'] = $this->language->get('text_info_t_unanswered');
+                $data['text_info_t_new'] = $this->language->get('text_info_t_new');
+                $data['text_info_v'] = $this->language->get('text_info_v');
+                $data['text_info_v_all'] = $this->language->get('text_info_v_all');
+                $data['text_info_v_new'] = $this->language->get('text_info_v_new');
+
+                $this->load->model('module/pvnm_testimonials');
+
+                $data['testimonials_total'] = $this->model_module_pvnm_testimonials->getTestimonialsTotal();
+                $data['testimonials_unanswered_total'] = $this->model_module_pvnm_testimonials->getTestimonialsTotal(array('filter_answer' => false));
+                $data['testimonials_new_total'] = $this->model_module_pvnm_testimonials->getTestimonialsTotal(array('filter_status' => false));
+                $data['votes_total'] = $this->model_module_pvnm_testimonials->getVotesTotal();
+                $data['votes_new_total'] = $this->model_module_pvnm_testimonials->getVotesTotal(array('filter_status' => false));
+
+                $data['testimonials_all'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'], 'SSL');
+                $data['testimonials_unanswered'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'] . '&filter_answer=0', 'SSL');
+                $data['testimonials_new'] = $this->url->link('module/pvnm_testimonials/testimonials', 'token=' . $this->session->data['token'] . '&filter_status=0', 'SSL');
+                $data['votes_all'] = $this->url->link('module/pvnm_testimonials/votes', 'token=' . $this->session->data['token'], 'SSL');
+                $data['votes_new'] = $this->url->link('module/pvnm_testimonials/votes', 'token=' . $this->session->data['token'] . '&filter_status=0', 'SSL');
+
+                $data['testimonials_alerts'] = $data['testimonials_new_total'] + $data['votes_new_total'];
+
+                $data['testimonials_informer'] = true;
+            } else {
+                $data['testimonials_informer'] = false;
+            }
+            ]]></add>
+        </operation>
+    </file>
+    <file path="admin/view/template/common/header.tpl">
+        <operation>
+            <search><![CDATA[
+<ul class="nav pull-right">
+            ]]></search>
+            <add position="after"><![CDATA[
+    <?php if ($testimonials_informer) { ?>
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><span class="label label-danger pull-left"><?php echo $testimonials_alerts; ?></span> <i class="fa fa-star-half-o fa-lg"></i></a>
+      <ul class="dropdown-menu dropdown-menu-right alerts-dropdown">
+        <li class="dropdown-header"><?php echo $text_info_t; ?></li>
+        <li><a href="<?php echo $testimonials_all; ?>" style="display: block; overflow: auto;"><span class="label label-success pull-right"><?php echo $testimonials_total; ?></span><?php echo $text_info_t_all; ?></a></li>
+        <li><a href="<?php echo $testimonials_unanswered; ?>"><span class="label label-warning pull-right"><?php echo $testimonials_unanswered_total; ?></span><?php echo $text_info_t_unanswered; ?></a></li>
+        <li><a href="<?php echo $testimonials_new; ?>"><span class="label label-danger pull-right"><?php echo $testimonials_new_total; ?></span><?php echo $text_info_t_new; ?></a></li>
+        <li class="divider"></li>
+        <li class="dropdown-header"><?php echo $text_info_v; ?></li>
+        <li><a href="<?php echo $votes_all; ?>"><span class="label label-success pull-right"><?php echo $votes_total; ?></span><?php echo $text_info_v_all; ?></a></li>
+        <li><a href="<?php echo $votes_new; ?>"><span class="label label-danger pull-right"><?php echo $votes_new_total; ?></span><?php echo $text_info_v_new; ?></a></li>
+      </ul>
+    </li>
+    <?php } ?>
+            ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/model/checkout/order.php">
 		<operation>
 			<search><![CDATA[
 if ($order_info['order_status_id'] && $order_status_id && $notify) {

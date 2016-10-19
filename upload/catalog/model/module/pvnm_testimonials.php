@@ -67,7 +67,7 @@ class ModelModulePvnmTestimonials extends Model {
 	public function addTestimonial($data = array()) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "pvnm_testimonials SET customer_id = '" . (int)$data['customer_id'] . "', order_id = '" . (int)$data['order_id'] . "', city = '" .  $this->db->escape($data['city']) . "', shipping = '" . $this->db->escape($data['shipping']) . "', rating = '" . (int)$data['rating'] . "', comment = '" .  $this->db->escape($data['comment']) . "', plus = '" .  $this->db->escape($data['plus']) . "', minus = '" .  $this->db->escape($data['minus']) . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
 
-		if ($this->config->get('pvnm_testimonials_alert_admin') == 1) {
+		if ($this->config->get('pvnm_testimonials_alert_admin')) {
 			$testimonials_name = $this->config->get('pvnm_testimonials_description');
 
 			$input = array(
@@ -79,11 +79,11 @@ class ModelModulePvnmTestimonials extends Model {
 			);
 
 			$output = array(
-				'store_name'   => $this->config->get('config_name'),
-				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'     => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
-				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
+				'store_name'		=> $this->config->get('config_name'),
+				'store_url'			=> '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'		=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'			=> $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
+				'testimonials' 	=> '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
 			);
 
 			$alert_admin_subject = $this->config->get('pvnm_testimonials_alert_admin_subject');
@@ -118,7 +118,7 @@ class ModelModulePvnmTestimonials extends Model {
 			$mail->send();
 		}
 
-		if ($this->config->get('pvnm_testimonials_customer_thanks') == 1) {
+		if ($this->config->get('pvnm_testimonials_alert_publish') && !$this->config->get('pvnm_testimonials_approval')) {
 			$testimonials_name = $this->config->get('pvnm_testimonials_description');
 
 			$input = array(
@@ -130,62 +130,11 @@ class ModelModulePvnmTestimonials extends Model {
 			);
 
 			$output = array(
-				'store_name'   => $this->config->get('config_name'),
-				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'     => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
-				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
-			);
-
-			$customer_thanks_subject = $this->config->get('pvnm_testimonials_customer_thanks_subject');
-			$customer_thanks_message = $this->config->get('pvnm_testimonials_customer_thanks_message');
-
-			$customer_thanks_subject = html_entity_decode(trim(str_replace($input, $output, $customer_thanks_subject[(int)$this->config->get('config_language_id')]['subject'])));
-			$customer_thanks_message = html_entity_decode(str_replace($input, $output, $customer_thanks_message[(int)$this->config->get('config_language_id')]['message']));
-
-			$html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">' . "\n";
-			$html .= '<html>' . "\n";
-			$html .= '  <head>' . "\n";
-			$html .= '    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">' . "\n";
-			$html .= '    <title>' . $customer_thanks_subject . '</title>' . "\n";
-			$html .= '  </head>' . "\n";
-			$html .= '  <body>' . $customer_thanks_message . '</body>' . "\n";
-			$html .= '</html>' . "\n";
-
-			$mail = new Mail();
-			$mail->protocol = $this->config->get('config_mail_protocol');
-			$mail->parameter = $this->config->get('config_mail_parameter');
-			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
-			$mail->smtp_username = $this->config->get('config_mail_smtp_username');
-			$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-			$mail->smtp_port = $this->config->get('config_mail_smtp_port');
-			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
-
-			$mail->setTo($this->customer->getEmail());
-			$mail->setFrom($this->config->get('pvnm_testimonials_email'));
-			$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
-			$mail->setSubject(html_entity_decode($customer_thanks_subject, ENT_QUOTES, 'UTF-8'));
-			$mail->setHtml($html);
-			$mail->send();
-		}
-
-		if ($this->config->get('pvnm_testimonials_alert_publish') == 1 && $this->config->get('pvnm_testimonials_approval') == 0) {
-			$testimonials_name = $this->config->get('pvnm_testimonials_description');
-
-			$input = array(
-				'{store_name}',
-				'{store_url}',
-				'{store_logo}',
-				'{customer}',
-				'{testimonials}'
-			);
-
-			$output = array(
-				'store_name'   => $this->config->get('config_name'),
-				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'     => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
-				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
+				'store_name'		=> $this->config->get('config_name'),
+				'store_url'			=> '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'		=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'			=> $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
+				'testimonials' 	=> '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>'
 			);
 
 			$alert_publish_subject = $this->config->get('pvnm_testimonials_alert_publish_subject');
@@ -216,6 +165,86 @@ class ModelModulePvnmTestimonials extends Model {
 			$mail->setFrom($this->config->get('pvnm_testimonials_email'));
 			$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 			$mail->setSubject(html_entity_decode($alert_publish_subject, ENT_QUOTES, 'UTF-8'));
+			$mail->setHtml($html);
+			$mail->send();
+		}
+
+		if ($this->config->get('pvnm_testimonials_customer_thanks')) {
+			$testimonials_name = $this->config->get('pvnm_testimonials_description');
+
+			if ($this->config->get('pvnm_testimonials_coupons')) {
+				$this->load->language('information/pvnm_testimonials');
+
+				$coupon = mt_rand(1000000, 9999999999) . $data['customer_id'];
+
+				$coupon_data = array(
+					'name'						=> $this->language->get('text_coupon_name') . $query->row['order_id'],
+					'code'						=> $coupon,
+					'discount'				=> $this->config->get('pvnm_testimonials_coupon_discount'),
+					'type'						=> $this->config->get('pvnm_testimonials_coupon_type'),
+					'total'						=> $this->config->get('pvnm_testimonials_coupon_total'),
+					'logged'					=> 1,
+					'shipping'				=> $this->config->get('pvnm_testimonials_coupon_shipping'),
+					'date_start'			=> date('Y-m-d'),
+					'date_end'				=> date('Y-m-d', strtotime('now +' . $this->config->get('pvnm_testimonials_coupon_days') . ' days')),
+					'uses_total'			=> $this->config->get('pvnm_testimonials_coupon_uses'),
+					'uses_customer'		=> $this->config->get('pvnm_testimonials_coupon_uses'),
+					'status'					=> 1,
+					'coupon_product'	=> $this->config->get('pvnm_testimonials_coupon_product'),
+					'coupon_category'	=> $this->config->get('pvnm_testimonials_coupon_category')
+				);
+
+				$this->addCoupon($coupon_data);
+			} else {
+				$coupon = '';
+			}
+
+			$input = array(
+				'{store_name}',
+				'{store_url}',
+				'{store_logo}',
+				'{customer}',
+				'{testimonials}',
+				'{coupon}'
+			);
+
+			$output = array(
+				'store_name'		=> $this->config->get('config_name'),
+				'store_url'			=> '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'		=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'			=> $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
+				'testimonials' 	=> '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>',
+				'coupon'				=> $coupon
+			);
+
+			$customer_thanks_subject = $this->config->get('pvnm_testimonials_customer_thanks_subject');
+			$customer_thanks_message = $this->config->get('pvnm_testimonials_customer_thanks_message');
+
+			$customer_thanks_subject = html_entity_decode(trim(str_replace($input, $output, $customer_thanks_subject[(int)$this->config->get('config_language_id')]['subject'])));
+			$customer_thanks_message = html_entity_decode(str_replace($input, $output, $customer_thanks_message[(int)$this->config->get('config_language_id')]['message']));
+
+			$html  = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/strict.dtd">' . "\n";
+			$html .= '<html>' . "\n";
+			$html .= '  <head>' . "\n";
+			$html .= '    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">' . "\n";
+			$html .= '    <title>' . $customer_thanks_subject . '</title>' . "\n";
+			$html .= '  </head>' . "\n";
+			$html .= '  <body>' . $customer_thanks_message . '</body>' . "\n";
+			$html .= '</html>' . "\n";
+
+			$mail = new Mail();
+			$mail->protocol = $this->config->get('config_mail_protocol');
+			$mail->parameter = $this->config->get('config_mail_parameter');
+			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+			$mail->smtp_username = $this->config->get('config_mail_smtp_username');
+			$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+			$mail->smtp_port = $this->config->get('config_mail_smtp_port');
+			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+			$mail->setTo($this->customer->getEmail());
+			$mail->setFrom($this->config->get('pvnm_testimonials_email'));
+			$mail->setSender(html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
+			$mail->setSubject(html_entity_decode($customer_thanks_subject, ENT_QUOTES, 'UTF-8'));
 			$mail->setHtml($html);
 			$mail->send();
 		}
@@ -278,5 +307,25 @@ class ModelModulePvnmTestimonials extends Model {
 		$query = $this->db->query("SELECT op.product_id, op.name, op.model, op.quantity, op.price, op.total, op.tax, p.image FROM " . DB_PREFIX . "order_product op LEFT JOIN " . DB_PREFIX . "product p ON op.product_id = p.product_id WHERE op.order_id = '" . (int)$order_id . "'");
 
 		return $query->rows;
+	}
+
+	public function addCoupon($data) {
+		$this->db->query("INSERT INTO " . DB_PREFIX . "coupon SET name = '" . $this->db->escape($data['name']) . "', code = '" . $this->db->escape($data['code']) . "', discount = '" . (float)$data['discount'] . "', type = '" . $this->db->escape($data['type']) . "', total = '" . (float)$data['total'] . "', logged = '" . (int)$data['logged'] . "', shipping = '" . (int)$data['shipping'] . "', date_start = '" . $this->db->escape($data['date_start']) . "', date_end = '" . $this->db->escape($data['date_end']) . "', uses_total = '" . (int)$data['uses_total'] . "', uses_customer = '" . (int)$data['uses_customer'] . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
+
+		$coupon_id = $this->db->getLastId();
+
+		if (isset($data['coupon_product'])) {
+			foreach ($data['coupon_product'] as $product_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "coupon_product SET coupon_id = '" . (int)$coupon_id . "', product_id = '" . (int)$product_id . "'");
+			}
+		}
+
+		if (isset($data['coupon_category'])) {
+			foreach ($data['coupon_category'] as $category_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "coupon_category SET coupon_id = '" . (int)$coupon_id . "', category_id = '" . (int)$category_id . "'");
+			}
+		}
+
+		return $coupon_id;
 	}
 }

@@ -9,16 +9,16 @@ var testimonial = {
 				$('.alert, .text-danger').remove();
 
 				if (json['error']) {
-					$('#pvnmTestimonial .modal-footer').prepend('<div class="alert alert-danger text-left"><i class="fa fa-check-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>'); // !!!!!!!!!!!!
+					$('#pvnmTestimonial .modal-footer').prepend('<div class="alert alert-danger text-left"><i class="fa fa-check-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>'); // !!!
 				}
 
 				if (json['success']) {
 					$('#pvnmTestimonial .modal-footer').html('<div class="alert alert-success text-left"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 				}
 			},
-	        error: function(xhr, ajaxOptions, thrownError) {
-	            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-	        }
+			error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
 		});
 	},
 	'vote': function(testimonial_id, type) {
@@ -40,9 +40,9 @@ var testimonial = {
 					$('.testimonial-result-' + testimonial_id).append('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 				}
 			},
-	        error: function(xhr, ajaxOptions, thrownError) {
-	            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-	        }
+			error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
 		});
 	}
 }

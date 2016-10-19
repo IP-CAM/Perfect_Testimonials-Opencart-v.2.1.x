@@ -37,104 +37,129 @@
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#tab-settings" data-toggle="tab"><i class="fa fa-cog"></i> <?php echo $tab_settings; ?></a></li>
 						<li><a href="#tab-help" data-toggle="tab"><i class="fa fa-comment"></i> <?php echo $tab_help; ?></a></li>
+						<li class="right save"><a onclick="document.getElementById('form').submit()" form="form"><i class="fa fa-save"></i> <?php echo $button_save; ?></a></li>
 					</ul>
 					<div class="tab-content">
-					<div class="tab-pane active" id="tab-settings">
-						<div class="row">
+						<div class="tab-pane active" id="tab-settings">
+							<div class="row">
 								<div class="col-md-2">
-										<ul class="nav nav-pills nav-stacked">
-											<?php foreach ($modules as $module) { ?>
-												<li id="module-<?php echo $module['module_id']; ?>" class="module"><a href="#tab-module-<?php echo $module['module_id']; ?>" data-toggle="tab"><?php echo $module['setting']['name']; ?><span style="display: block; float: right;"><i class="fa fa-remove" onclick="$('#module-<?php echo $module['module_id']; ?>').remove(); $('#tab-module-<?php echo $module['module_id']; ?>').remove(); $('form').append('<input type=\'hidden\' name=\'delete[]\' value=\'<?php echo $module['module_id']; ?>\' />'); $('.nav-stacked .module:first-child a').trigger('click'); return false;" style="color: red;"></i></span></a></li>
-											<?php } ?>
-											<li class="add"><a id="module-add" onclick="addModule();" style="cursor: pointer;"><?php echo $button_add; ?><span style="display: block; float: right;"><i class="fa fa-plus" style="color: green;"></i></span></a></li>
-										</ul>
+									<ul class="nav nav-pills nav-stacked">
+										<?php foreach ($modules as $module) { ?>
+										<li id="module-<?php echo $module['module_id']; ?>" class="module"><a href="#tab-module-<?php echo $module['module_id']; ?>" data-toggle="tab"><?php echo $module['setting']['name']; ?><span style="display: block; float: right;"><i class="fa fa-remove" onclick="$('#module-<?php echo $module['module_id']; ?>').remove(); $('#tab-module-<?php echo $module['module_id']; ?>').remove(); $('form').append('<input type=\'hidden\' name=\'delete[]\' value=\'<?php echo $module['module_id']; ?>\' />'); $('.nav-stacked .module:first-child a').trigger('click'); return false;"></i></span></a></li>
+										<?php } ?>
+										<li class="add"><a id="module-add" onclick="addModule();"><?php echo $button_add; ?><span style="display: block; float: right;"><i class="fa fa-plus"></i></span></a></li>
+									</ul>
 								</div>
 								<div class="col-md-10">
-										<div class="tab-content">
-											<?php foreach ($modules as $module) { ?>
-												<div class="tab-pane" id="tab-module-<?php echo $module['module_id']; ?>">
-														<input type="hidden" name="module[<?php echo $module['module_id']; ?>][module_id]" value="<?php echo $module['module_id']; ?>" />
-														<div class="form-group">
-																<label class="col-sm-2 control-label" for="input-name<?php echo $module['module_id']; ?>"><?php echo $entry_name; ?></label>
-																<div class="col-sm-10">
-																		<input type="text" name="module[<?php echo $module['module_id']; ?>][name]" value="<?php echo $module['setting']['name']; ?>" placeholder="" id="input-name<?php echo $module['module_id']; ?>" class="form-control" />
-																</div>
-														</div>
-														<div class="form-group">
-															<label class="col-sm-2 control-label" for="input-rating-status<?php echo $module['module_id']; ?>"><?php echo $entry_rating_status; ?></label>
-															<div class="col-sm-10">
-																<div class="btn-group" data-toggle="buttons" id="input-rating-status<?php echo $module['module_id']; ?>">
-																<?php if ($module['setting']['rating_status'] == 1) { ?>
-																<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][rating_status]" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
-																<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][rating_status]" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
-																<?php } else { ?>
-																<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][rating_status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
-																<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][rating_status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
-																<?php } ?>
-																</div>
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="col-sm-2 control-label" for="input-testimonials-status<?php echo $module['module_id']; ?>"><?php echo $entry_testimonials_status; ?></label>
-															<div class="col-sm-10">
-																<div class="btn-group" data-toggle="buttons" id="input-testimonials-status<?php echo $module['module_id']; ?>">
-																<?php if ($module['setting']['testimonials_status'] == 1) { ?>
-																<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][testimonials_status]" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
-																<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][testimonials_status]" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
-																<?php } else { ?>
-																<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][testimonials_status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
-																<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][testimonials_status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
-																<?php } ?>
-																</div>
-															</div>
-														</div>
-														<div class="form-group">
-																<label class="col-sm-2 control-label" for="input-testimonials-title<?php echo $module['module_id']; ?>"><?php echo $entry_testimonials_title; ?></label>
-																<div class="col-sm-10">
-																	<?php foreach ($languages as $language) { ?>
-																		<div class="input-group pull-left">
-																		<span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> </span>
-																		<input type="text" name="module[<?php echo $module['module_id']; ?>][testimonials_title][<?php echo $language['language_id']; ?>]" value="<?php echo $module['setting']['testimonials_title'][$language['language_id']]; ?>" placeholder="" id="input-testimonials-title<?php echo $module['module_id']; ?>" class="form-control" />
-																		</div>
-																	<?php } ?>
-																</div>
-														</div>
-														<div class="form-group">
-															<label class="col-sm-2 control-label" for="input-testimonials-limit<?php echo $module['module_id']; ?>"><?php echo $entry_testimonials_limit; ?></label>
-															<div class="col-sm-10">
-																<input type="text" name="module[<?php echo $module['module_id']; ?>][testimonials_limit]" value="<?php echo $module['setting']['testimonials_limit']; ?>" placeholder="<?php echo $entry_testimonials_limit; ?>" id="input-testimonials-limit<?php echo $module['module_id']; ?>" class="form-control" />
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="col-sm-2 control-label" for="input-status<?php echo $module['module_id']; ?>"><?php echo $entry_status; ?></label>
-															<div class="col-sm-10">
-																<div class="btn-group" data-toggle="buttons" id="input-status<?php echo $module['module_id']; ?>">
-																<?php if ($module['setting']['status'] == 1) { ?>
-																<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][status]" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
-																<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][status]" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
-																<?php } else { ?>
-																<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
-																<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
-																<?php } ?>
-																</div>
-															</div>
-														</div>
+									<div class="tab-content">
+										<?php foreach ($modules as $module) { ?>
+										<div class="tab-pane" id="tab-module-<?php echo $module['module_id']; ?>">
+											<input type="hidden" name="module[<?php echo $module['module_id']; ?>][module_id]" value="<?php echo $module['module_id']; ?>" />
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="input-name<?php echo $module['module_id']; ?>"><?php echo $entry_name; ?></label>
+												<div class="col-sm-10">
+													<input type="text" name="module[<?php echo $module['module_id']; ?>][name]" value="<?php echo $module['setting']['name']; ?>" placeholder="" id="input-name<?php echo $module['module_id']; ?>" class="form-control" />
 												</div>
-											<?php } ?>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="input-rating-status<?php echo $module['module_id']; ?>"><?php echo $entry_rating_status; ?></label>
+												<div class="col-sm-10">
+													<div class="btn-group" data-toggle="buttons" id="input-rating-status<?php echo $module['module_id']; ?>">
+														<?php if ($module['setting']['rating_status'] == 1) { ?>
+														<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][rating_status]" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
+														<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][rating_status]" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
+														<?php } else { ?>
+														<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][rating_status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
+														<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][rating_status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
+														<?php } ?>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="input-testimonials-status<?php echo $module['module_id']; ?>"><?php echo $entry_testimonials_status; ?></label>
+												<div class="col-sm-10">
+													<div class="btn-group" data-toggle="buttons" id="input-testimonials-status<?php echo $module['module_id']; ?>">
+														<?php if ($module['setting']['testimonials_status'] == 1) { ?>
+														<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][testimonials_status]" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
+														<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][testimonials_status]" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
+														<?php } else { ?>
+														<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][testimonials_status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
+														<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][testimonials_status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
+														<?php } ?>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="input-testimonials-title<?php echo $module['module_id']; ?>"><?php echo $entry_testimonials_title; ?></label>
+												<div class="col-sm-10">
+													<?php foreach ($languages as $language) { ?>
+													<div class="input-group pull-left">
+														<span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> </span>
+														<input type="text" name="module[<?php echo $module['module_id']; ?>][testimonials_title][<?php echo $language['language_id']; ?>]" value="<?php echo $module['setting']['testimonials_title'][$language['language_id']]; ?>" placeholder="" id="input-testimonials-title<?php echo $module['module_id']; ?>" class="form-control" />
+													</div>
+													<?php } ?>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="input-testimonials-limit<?php echo $module['module_id']; ?>"><?php echo $entry_testimonials_limit; ?></label>
+												<div class="col-sm-10">
+													<input type="text" name="module[<?php echo $module['module_id']; ?>][testimonials_limit]" value="<?php echo $module['setting']['testimonials_limit']; ?>" placeholder="<?php echo $entry_testimonials_limit; ?>" id="input-testimonials-limit<?php echo $module['module_id']; ?>" class="form-control" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="input-sort<?php echo $module['module_id']; ?>"><?php echo $entry_sort; ?></label>
+												<div class="col-sm-10">
+													<select name="module[<?php echo $module['module_id']; ?>][sort]" id="input-sort<?php echo $module['module_id']; ?>" class="form-control">
+														<option value="date_added" <?php if ($module['setting']['sort'] == 'date_added') { ?>selected="selected"<?php } ?>><?php echo $text_sort_date; ?></option>
+														<option value="rating" <?php if ($module['setting']['sort'] == 'rating') { ?>selected="selected"<?php } ?>><?php echo $text_sort_rating; ?></option>
+														<option value="vote" <?php if ($module['setting']['sort'] == 'vote') { ?>selected="selected"<?php } ?>><?php echo $text_sort_usefulness; ?></option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="input-status<?php echo $module['module_id']; ?>"><?php echo $entry_status; ?></label>
+												<div class="col-sm-10">
+													<div class="btn-group" data-toggle="buttons" id="input-status<?php echo $module['module_id']; ?>">
+														<?php if ($module['setting']['status'] == 1) { ?>
+														<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][status]" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
+														<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][status]" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
+														<?php } else { ?>
+														<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
+														<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
+														<?php } ?>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label" for="input-cache<?php echo $module['module_id']; ?>"><?php echo $entry_cache; ?></label>
+												<div class="col-sm-10">
+													<div class="btn-group" data-toggle="buttons" id="input-cache<?php echo $module['module_id']; ?>">
+														<?php if ($module['setting']['cache'] == 1) { ?>
+														<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][cache]" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
+														<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][cache]" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
+														<?php } else { ?>
+														<label class="btn btn-info"><input type="radio" name="module[<?php echo $module['module_id']; ?>][cache]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
+														<label class="btn btn-info active"><input type="radio" name="module[<?php echo $module['module_id']; ?>][cache]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
+														<?php } ?>
+													</div>
+												</div>
+											</div>
 										</div>
+										<?php } ?>
+									</div>
 								</div>
+							</div>
 						</div>
-					</div>
-					<div class="tab-pane" id="tab-help">
-						<div class="form-group">
-							<label class="col-sm-2 control-label"><?php echo $text_documentation; ?></label>
-							<div class="col-sm-10"><a href="https://github.com/p0v1n0m/opencart_perfect_testimonials" target="_blank" class="btn">https://github.com/p0v1n0m/opencart_perfect_testimonials</a></div>
+						<div class="tab-pane" id="tab-help">
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><?php echo $text_developer; ?></label>
+								<div class="col-sm-10"><a href="mailto:p0v1n0m@gmail.com" class="btn btn-link">p0v1n0m@gmail.com</a></div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><?php echo $text_documentation; ?></label>
+								<div class="col-sm-10"><a href="https://github.com/p0v1n0m/opencart_perfect_testimonials" target="_blank" class="btn">https://github.com/p0v1n0m/opencart_perfect_testimonials</a></div>
+							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label"><?php echo $text_developer; ?></label>
-							<div class="col-sm-10"><a href="mailto:p0v1n0m@gmail.com" class="btn">p0v1n0m@gmail.com</a></div>
-						</div>
-					</div>
 					</div>
 				</form>
 			</div>
@@ -150,67 +175,86 @@ $('.nav-stacked .module:first-child a').trigger('click');
 
 var module_row = <?php echo $module_row; ?>;
 
-function addModule() {  
-		html  = '<div class="tab-pane" id="tab-module-' + module_row + '">';
-		html += '   <div class="form-group">';
-		html += '       <label class="col-sm-2 control-label" for="input-name' + module_row + '"><?php echo $entry_name; ?></label>';
-		html += '       <div class="col-sm-10">';
-		html += '           <input type="text" name="module[' + module_row + '][name]" value="<?php echo $text_tab_module; ?> ' + module_row + '" placeholder="" id="input-name' + module_row + '" class="form-control" />';
-		html += '       </div>';
-		html += '   </div>';
-		html += '   <div class="form-group">';
-		html += '       <label class="col-sm-2 control-label" for="input-rating-status' + module_row + '"><?php echo $entry_rating_status; ?></label>';
-		html += '       <div class="col-sm-10">';
-		html += '           <div class="btn-group" data-toggle="buttons" id="input-rating-status' + module_row + '">';
-		html += '               <label class="btn btn-info"><input type="radio" name="module[' + module_row + '][rating_status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>';
-		html += '               <label class="btn btn-info active"><input type="radio" name="module[' + module_row + '][rating_status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>';
-		html += '           </div>';
-		html += '       </div>';
-		html += '   </div>';
-		html += '   <div class="form-group">';
-		html += '       <label class="col-sm-2 control-label" for="input-testimonials-status' + module_row + '"><?php echo $entry_testimonials_status; ?></label>';
-		html += '       <div class="col-sm-10">';
-		html += '           <div class="btn-group" data-toggle="buttons" id="input-testimonials-status' + module_row + '">';
-		html += '               <label class="btn btn-info"><input type="radio" name="module[' + module_row + '][testimonials_status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>';
-		html += '               <label class="btn btn-info active"><input type="radio" name="module[' + module_row + '][testimonials_status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>';
-		html += '           </div>';
-		html += '       </div>';
-		html += '   </div>';
-		html += '   <div class="form-group">';
-		html += '       <label class="col-sm-2 control-label" for="input-testimonials-title' + module_row + '"><?php echo $entry_testimonials_title; ?></label>';
-		html += '       <div class="col-sm-10">';
-		<?php foreach ($languages as $language) { ?>
-		html += '           <div class="input-group pull-left">';
-		html += '               <span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> </span>';
-		html += '               <input type="text" name="module[' + module_row + '][testimonials_title][<?php echo $language['language_id']; ?>]" value="" placeholder="" id="input-testimonials-title' + module_row + '" class="form-control" />';
-		html += '           </div>';
-		<?php } ?>
-		html += '       </div>';
-		html += '   </div>';
-		html += '   <div class="form-group">';
-		html += '       <label class="col-sm-2 control-label" for="input-testimonials-limit' + module_row + '"><?php echo $entry_testimonials_limit; ?></label>';
-		html += '       <div class="col-sm-10">';
-		html += '           <input type="text" name="module[' + module_row + '][testimonials_limit]" value="1" placeholder="" id="input-testimonials-limit' + module_row + '" class="form-control" />';
-		html += '       </div>';
-		html += '   </div>';
-		html += '   <div class="form-group">';
-		html += '       <label class="col-sm-2 control-label" for="input-status' + module_row + '"><?php echo $entry_status; ?></label>';
-		html += '       <div class="col-sm-10">';
-		html += '           <div class="btn-group" data-toggle="buttons" id="input-status' + module_row + '">';
-		html += '               <label class="btn btn-info"><input type="radio" name="module[' + module_row + '][status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>';
-		html += '               <label class="btn btn-info active"><input type="radio" name="module[' + module_row + '][status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>';
-		html += '           </div>';
-		html += '       </div>';
-		html += '   </div>';
-		html += '</div>';
+function addModule() {	
+	html  = '<div class="tab-pane" id="tab-module-' + module_row + '">';
+	html += '	<div class="form-group">';
+	html += '		<label class="col-sm-2 control-label" for="input-name' + module_row + '"><?php echo $entry_name; ?></label>';
+	html += '		<div class="col-sm-10">';
+	html += '			<input type="text" name="module[' + module_row + '][name]" value="<?php echo $text_tab_module; ?> ' + module_row + '" placeholder="" id="input-name' + module_row + '" class="form-control" />';
+	html += '		</div>';
+	html += '	</div>';
+	html += '	<div class="form-group">';
+	html += '		<label class="col-sm-2 control-label" for="input-rating-status' + module_row + '"><?php echo $entry_rating_status; ?></label>';
+	html += '		<div class="col-sm-10">';
+	html += '			<div class="btn-group" data-toggle="buttons" id="input-rating-status' + module_row + '">';
+	html += '				<label class="btn btn-info"><input type="radio" name="module[' + module_row + '][rating_status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>';
+	html += '				<label class="btn btn-info active"><input type="radio" name="module[' + module_row + '][rating_status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>';
+	html += '			</div>';
+	html += '		</div>';
+	html += '	</div>';
+	html += '	<div class="form-group">';
+	html += '		<label class="col-sm-2 control-label" for="input-testimonials-status' + module_row + '"><?php echo $entry_testimonials_status; ?></label>';
+	html += '		<div class="col-sm-10">';
+	html += '			<div class="btn-group" data-toggle="buttons" id="input-testimonials-status' + module_row + '">';
+	html += '				<label class="btn btn-info"><input type="radio" name="module[' + module_row + '][testimonials_status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>';
+	html += '				<label class="btn btn-info active"><input type="radio" name="module[' + module_row + '][testimonials_status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>';
+	html += '			</div>';
+	html += '		</div>';
+	html += '	</div>';
+	html += '	<div class="form-group">';
+	html += '		<label class="col-sm-2 control-label" for="input-testimonials-title' + module_row + '"><?php echo $entry_testimonials_title; ?></label>';
+	html += '		<div class="col-sm-10">';
+	<?php foreach ($languages as $language) { ?>
+	html += '			<div class="input-group pull-left">';
+	html += '				<span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> </span>';
+	html += '				<input type="text" name="module[' + module_row + '][testimonials_title][<?php echo $language['language_id']; ?>]" value="" placeholder="" id="input-testimonials-title' + module_row + '" class="form-control" />';
+	html += '			</div>';
+	<?php } ?>
+	html += '		</div>';
+	html += '	</div>';
+	html += '	<div class="form-group">';
+	html += '		<label class="col-sm-2 control-label" for="input-testimonials-limit' + module_row + '"><?php echo $entry_testimonials_limit; ?></label>';
+	html += '		<div class="col-sm-10">';
+	html += '			<input type="text" name="module[' + module_row + '][testimonials_limit]" value="1" placeholder="" id="input-testimonials-limit' + module_row + '" class="form-control" />';
+	html += '		</div>';
+	html += '	</div>';
+	html += '	<div class="form-group">';
+	html += '		<label class="col-sm-2 control-label" for="input-sort' + module_row + '"><?php echo $entry_sort; ?></label>';
+	html += '		<div class="col-sm-10">';
+	html += '			<select name="module[' + module_row + '][sort]" id="input-sort' + module_row + '" class="form-control">';
+	html += '				<option value="date_added"><?php echo $text_sort_date; ?></option>';
+	html += '				<option value="rating"><?php echo $text_sort_rating; ?></option>';
+	html += '				<option value="vote"><?php echo $text_sort_usefulness; ?></option>';
+	html += '			</select>';
+	html += '		</div>';
+	html += '	</div>';
+	html += '	<div class="form-group">';
+	html += '		<label class="col-sm-2 control-label" for="input-status' + module_row + '"><?php echo $entry_status; ?></label>';
+	html += '		<div class="col-sm-10">';
+	html += '			<div class="btn-group" data-toggle="buttons" id="input-status' + module_row + '">';
+	html += '				<label class="btn btn-info"><input type="radio" name="module[' + module_row + '][status]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>';
+	html += '				<label class="btn btn-info active"><input type="radio" name="module[' + module_row + '][status]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>';
+	html += '			</div>';
+	html += '		</div>';
+	html += '	</div>';
+	html += '	<div class="form-group">';
+	html += '		<label class="col-sm-2 control-label" for="input-cache' + module_row + '"><?php echo $entry_cache; ?></label>';
+	html += '		<div class="col-sm-10">';
+	html += '			<div class="btn-group" data-toggle="buttons" id="input-cache' + module_row + '">';
+	html += '				<label class="btn btn-info"><input type="radio" name="module[' + module_row + '][cache]" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>';
+	html += '				<label class="btn btn-info active"><input type="radio" name="module[' + module_row + '][cache]" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>';
+	html += '			</div>';
+	html += '		</div>';
+	html += '	</div>';
+	html += '</div>';
 
-		$('.row .tab-content').append(html);
+	$('.row .tab-content').append(html);
 
-		$('.nav-stacked .add').before('<li id="module-' + module_row + '" class="module"><a href="#tab-module-' + module_row + '" data-toggle="tab"><?php echo $text_tab_module; ?> ' + module_row + '<span style="display: block; float: right;"><i class="fa fa-remove" onclick="$(\'#module-' + module_row + '\').remove(); $(\'#tab-module-' + module_row + '\').remove(); $(\'.nav-stacked .module:first-child a\').trigger(\'click\'); return false;" style="color: red;"></i></span></a></li>');
+	$('.nav-stacked .add').before('<li id="module-' + module_row + '" class="module"><a href="#tab-module-' + module_row + '" data-toggle="tab"><?php echo $text_tab_module; ?> ' + module_row + '<span style="display: block; float: right;"><i class="fa fa-remove" onclick="$(\'#module-' + module_row + '\').remove(); $(\'#tab-module-' + module_row + '\').remove(); $(\'.nav-stacked .module:first-child a\').trigger(\'click\'); return false;"></i></span></a></li>');
 
-		$('#module-' + module_row + ' a').trigger('click');
+	$('#module-' + module_row + ' a').trigger('click');
 
-		module_row++;
+	module_row++;
 }
 //--></script>
 <?php echo $footer; ?>

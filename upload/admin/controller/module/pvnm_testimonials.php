@@ -35,6 +35,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['tab_settings'] = $this->language->get('tab_settings');
 		$data['tab_general'] = $this->language->get('tab_general');
 		$data['tab_email'] = $this->language->get('tab_email');
+		$data['tab_coupons'] = $this->language->get('tab_coupons');
 		$data['tab_help'] = $this->language->get('tab_help');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
@@ -49,9 +50,13 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['text_store_logo'] = $this->language->get('text_store_logo');
 		$data['text_customer'] = $this->language->get('text_customer');
 		$data['text_testimonials'] = $this->language->get('text_testimonials');
+		$data['text_coupon'] = $this->language->get('text_coupon');
+		$data['text_percent'] = $this->language->get('text_percent');
+		$data['text_amount'] = $this->language->get('text_amount');
 		$data['text_documentation'] = $this->language->get('text_documentation');
 		$data['text_developer'] = $this->language->get('text_developer');
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_informer'] = $this->language->get('entry_informer');
 		$data['entry_approval'] = $this->language->get('entry_approval');
 		$data['entry_limit'] = $this->language->get('entry_limit');
 		$data['entry_email'] = $this->language->get('entry_email');
@@ -84,6 +89,15 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['entry_customer_thanks'] = $this->language->get('entry_customer_thanks');
 		$data['entry_subject'] = $this->language->get('entry_subject');
 		$data['entry_message'] = $this->language->get('entry_message');
+		$data['entry_coupons'] = $this->language->get('entry_coupons');
+		$data['entry_coupon_type'] = $this->language->get('entry_coupon_type');
+		$data['entry_coupon_discount'] = $this->language->get('entry_coupon_discount');
+		$data['entry_coupon_total'] = $this->language->get('entry_coupon_total');
+		$data['entry_coupon_shipping'] = $this->language->get('entry_coupon_shipping');
+		$data['entry_coupon_product'] = $this->language->get('entry_coupon_product');
+		$data['entry_coupon_category'] = $this->language->get('entry_coupon_category');
+		$data['entry_coupon_days'] = $this->language->get('entry_coupon_days');
+		$data['entry_coupon_uses'] = $this->language->get('entry_coupon_uses');
 		$data['entry_macros'] = $this->language->get('entry_macros');
 
 		if (isset($this->error['warning'])) {
@@ -128,6 +142,12 @@ class ControllerModulePvnmTestimonials extends Controller {
 			$data['pvnm_testimonials_status'] = $this->request->post['pvnm_testimonials_status'];
 		} else {
 			$data['pvnm_testimonials_status'] = $this->config->get('pvnm_testimonials_status');
+		}
+
+		if (isset($this->request->post['pvnm_testimonials_informer'])) {
+			$data['pvnm_testimonials_informer'] = $this->request->post['pvnm_testimonials_informer'];
+		} else {
+			$data['pvnm_testimonials_informer'] = $this->config->get('pvnm_testimonials_informer');
 		}
 
 		if (isset($this->request->post['pvnm_testimonials_approval'])) {
@@ -346,6 +366,94 @@ class ControllerModulePvnmTestimonials extends Controller {
 			$data['pvnm_testimonials_customer_thanks_message'] = array();
 		}
 
+		if (isset($this->request->post['pvnm_testimonials_coupons'])) {
+			$data['pvnm_testimonials_coupons'] = $this->request->post['pvnm_testimonials_coupons'];
+		} else {
+			$data['pvnm_testimonials_coupons'] = $this->config->get('pvnm_testimonials_coupons');
+		}
+
+		if (isset($this->request->post['pvnm_testimonials_coupon_type'])) {
+			$data['pvnm_testimonials_coupon_type'] = $this->request->post['pvnm_testimonials_coupon_type'];
+		} else {
+			$data['pvnm_testimonials_coupon_type'] = $this->config->get('pvnm_testimonials_coupon_type');
+		}
+
+		if (isset($this->request->post['pvnm_testimonials_coupon_discount'])) {
+			$data['pvnm_testimonials_coupon_discount'] = $this->request->post['pvnm_testimonials_coupon_discount'];
+		} else {
+			$data['pvnm_testimonials_coupon_discount'] = $this->config->get('pvnm_testimonials_coupon_discount');
+		}
+
+		if (isset($this->request->post['pvnm_testimonials_coupon_total'])) {
+			$data['pvnm_testimonials_coupon_total'] = $this->request->post['pvnm_testimonials_coupon_total'];
+		} else {
+			$data['pvnm_testimonials_coupon_total'] = $this->config->get('pvnm_testimonials_coupon_total');
+		}
+
+		if (isset($this->request->post['pvnm_testimonials_coupon_shipping'])) {
+			$data['pvnm_testimonials_coupon_shipping'] = $this->request->post['pvnm_testimonials_coupon_shipping'];
+		} else {
+			$data['pvnm_testimonials_coupon_shipping'] = $this->config->get('pvnm_testimonials_coupon_shipping');
+		}
+
+		if (isset($this->request->post['pvnm_testimonials_coupon_product'])) {
+			$products = $this->request->post['pvnm_testimonials_coupon_product'];
+		} elseif ($this->config->get('pvnm_testimonials_coupon_product')) {
+			$products = $this->config->get('pvnm_testimonials_coupon_product');
+		} else {
+			$products = array();
+		}
+
+		$this->load->model('catalog/product');
+
+		$data['pvnm_testimonials_coupon_product'] = array();
+
+		foreach ($products as $product_id) {
+			$product_info = $this->model_catalog_product->getProduct($product_id);
+
+			if ($product_info) {
+				$data['pvnm_testimonials_coupon_product'][] = array(
+					'product_id' => $product_info['product_id'],
+					'name'       => $product_info['name']
+				);
+			}
+		}
+
+		if (isset($this->request->post['pvnm_testimonials_coupon_category'])) {
+			$categories = $this->request->post['pvnm_testimonials_coupon_category'];
+		} elseif ($this->config->get('pvnm_testimonials_coupon_category')) {
+			$categories = $this->config->get('pvnm_testimonials_coupon_category');
+		} else {
+			$categories = array();
+		}
+
+		$this->load->model('catalog/category');
+
+		$data['pvnm_testimonials_coupon_category'] = array();
+
+		foreach ($categories as $category_id) {
+			$category_info = $this->model_catalog_category->getCategory($category_id);
+
+			if ($category_info) {
+				$data['pvnm_testimonials_coupon_category'][] = array(
+					'category_id' => $category_info['category_id'],
+					'name'        => ($category_info['path'] ? $category_info['path'] . ' &gt; ' : '') . $category_info['name']
+				);
+			}
+		}
+
+		if (isset($this->request->post['pvnm_testimonials_coupon_days'])) {
+			$data['pvnm_testimonials_coupon_days'] = $this->request->post['pvnm_testimonials_coupon_days'];
+		} else {
+			$data['pvnm_testimonials_coupon_days'] = $this->config->get('pvnm_testimonials_coupon_days');
+		} 
+
+		if (isset($this->request->post['pvnm_testimonials_coupon_uses'])) {
+			$data['pvnm_testimonials_coupon_uses'] = $this->request->post['pvnm_testimonials_coupon_uses'];
+		} else {
+			$data['pvnm_testimonials_coupon_uses'] = $this->config->get('pvnm_testimonials_coupon_uses');
+		}
+
 		$this->load->model('localisation/order_status');
 
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
@@ -369,6 +477,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 
 		$this->load->model('localisation/language');
 
+		$data['token'] = $this->session->data['token'];
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
 		$data['header'] = $this->load->controller('common/header');
@@ -558,8 +667,6 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_yes'] = $this->language->get('text_yes');
 
-		$data['token'] = $this->session->data['token'];
-
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -667,6 +774,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
+		$data['token'] = $this->session->data['token'];
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -819,8 +927,6 @@ class ControllerModulePvnmTestimonials extends Controller {
 			);
 		}
 
-		$data['token'] = $this->session->data['token'];
-
 		$testimonial_info = $this->model_module_pvnm_testimonials->getTestimonial($this->request->get['testimonial_id']);
 
 		if (!empty($testimonial_info)) {
@@ -906,6 +1012,8 @@ class ControllerModulePvnmTestimonials extends Controller {
 		} else {
 			$data['answer'] = '';
 		}
+
+		$data['token'] = $this->session->data['token'];
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -1094,8 +1202,6 @@ class ControllerModulePvnmTestimonials extends Controller {
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_guest'] = $this->language->get('text_guest');
 
-		$data['token'] = $this->session->data['token'];
-
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -1203,6 +1309,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
+		$data['token'] = $this->session->data['token'];
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

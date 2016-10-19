@@ -1,6 +1,6 @@
 #testimonial-rating {
 	width: 150px;
-    display: inline-block;
+	display: inline-block;
 }
 .store-rating-text {
 	font-size: 20px;
@@ -8,16 +8,16 @@
 .store-rating-stars {
 	width: 125px;
 	height: 20px;
-    display: inline-block;
-    margin: 0 0 0 10px;
-    padding: 0;
+	display: inline-block;
+	margin: 0 0 0 10px;
+	padding: 0;
 	background: url('star-off.png') left top repeat-x;
 }
 .store-rating-stars span {
 	height: 100%;
-    display: block;
-    margin: 0;
-    padding: 0;
+	display: block;
+	margin: 0;
+	padding: 0;
 	background: #fff url('star-on.png') left top repeat-x;
 }
 .store-rating-filter, .store-customer-name {
@@ -31,7 +31,7 @@
 	border: none;
 }
 .store-rating-item .testimonial-rating-stars {
-    margin: 0;
+	margin: 0;
 }
 .store-rating-progress {
 	height: 10px;
@@ -59,21 +59,21 @@
 .testimonial-date {
 	font-size: 11px;
 	color: #ccc;
-	margin: 0 0 0 10px;
+	margin: 0 10px;
 }
 .testimonial-rating-stars {
 	width: 95px;
 	height: 15px;
-    display: inline-block;
-    margin: 0 0 0 10px;
-    padding: 0;
+	display: inline-block;
+	margin: 0 0 0 10px;
+	padding: 0;
 	background: url('testimonial-star-off.png') left top repeat-x;
 }
 .testimonial-rating-stars span {
 	height: 100%;
-    display: block;
-    margin: 0;
-    padding: 0;
+	display: block;
+	margin: 0;
+	padding: 0;
 	background: url('testimonial-star-on.png') left top repeat-x;
 }
 .testimonial-answer {

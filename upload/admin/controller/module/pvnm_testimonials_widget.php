@@ -14,7 +14,11 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 			if (!empty($this->request->post['module'])) {
 				foreach ($this->request->post['module'] as $key => $module) {
 					if (!isset($module['module_id'])) {
-						$this->model_extension_module->addModule('pvnm_testimonials_widget', $this->request->post['module'][$key]);
+						$module_data = $this->request->post['module'][$key];
+
+						$module_data['module_id'] = $this->model_extension_module->addModule('pvnm_testimonials_widget', $this->request->post['module'][$key]);
+
+						$this->model_extension_module->editModule($module_data['module_id'], $module_data);
 					} else {
 						$this->model_extension_module->editModule($module['module_id'], $this->request->post['module'][$key]);
 					}
@@ -52,12 +56,17 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
 		$data['text_tab_module'] = $this->language->get('text_tab_module');
+		$data['text_sort_date'] = $this->language->get('text_sort_date');
+		$data['text_sort_rating'] = $this->language->get('text_sort_rating');
+		$data['text_sort_usefulness'] = $this->language->get('text_sort_usefulness');
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_rating_status'] = $this->language->get('entry_rating_status');
 		$data['entry_testimonials_status'] = $this->language->get('entry_testimonials_status');
 		$data['entry_testimonials_title'] = $this->language->get('entry_testimonials_title');
 		$data['entry_testimonials_limit'] = $this->language->get('entry_testimonials_limit');
+		$data['entry_sort'] = $this->language->get('entry_sort');
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_cache'] = $this->language->get('entry_cache');
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -131,13 +140,16 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 			}
 		}
 
-		$data['languages'] = $this->model_localisation_language->getLanguages();
-		$data['token'] = $this->session->data['token'];
+		sort($data['modules']);
+
 		$data['module_row'] = 1;
 
-		if (count($modules) + 1 > $data['module_row']) {
-			$data['module_row'] = count($modules) + 1;
+		if (count($data['modules']) + 1 > $data['module_row']) {
+			$data['module_row'] = count($data['modules']) + 1;
 		}
+
+		$data['token'] = $this->session->data['token'];
+		$data['languages'] = $this->model_localisation_language->getLanguages();
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

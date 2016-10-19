@@ -6,9 +6,9 @@ class ControllerInformationPvnmTestimonials extends Controller {
 		$this->load->model('module/pvnm_testimonials');
 		$this->load->model('tool/image');
 
-		$this->document->addStyle('catalog/view/javascript/pvnm_testimonials/testimonials.css');
-		$this->document->addScript('catalog/view/javascript/pvnm_testimonials/testimonials.js');
-		$this->document->addScript('catalog/view/javascript/pvnm_testimonials/jquery.raty.js');
+		$this->document->addStyle('catalog/view/javascript/pvnm/testimonials/testimonials.css');
+		$this->document->addScript('catalog/view/javascript/pvnm/testimonials/testimonials.js');
+		$this->document->addScript('catalog/view/javascript/pvnm/testimonials/jquery.raty.js');
 
 		$localisations = $this->config->get('pvnm_testimonials_description');
 		$localisations = $localisations[$this->config->get('config_language_id')];
@@ -161,11 +161,11 @@ class ControllerInformationPvnmTestimonials extends Controller {
 		$data['testimonials'] = array();
 
 		$filter_data = array(
-			'rating' => $store_rating, 
-			'sort'   => $sort,
-			'order'  => $order,
-			'start'  => ($page - 1) * $limit,
-			'limit'  => $limit
+			'rating'	=> $store_rating, 
+			'sort'		=> $sort,
+			'order'		=> $order,
+			'start'		=> ($page - 1) * $limit,
+			'limit'		=> $limit
 		);
 
 		$results = $this->model_module_pvnm_testimonials->getTestimonials($filter_data);
@@ -177,6 +177,7 @@ class ControllerInformationPvnmTestimonials extends Controller {
 
 			if ($this->customer->getId() == $result['customer_id']) {
 				$vote_status = null;
+
 				$author = $this->language->get('text_my_testimonial');
 			} elseif ($this->config->get('pvnm_testimonials_lastname_status') == 1) {
 				$author = $result['firstname'] . ' ' . $result['lastname']{0} . '***' . substr($result['lastname'], 1, 1);
@@ -216,33 +217,33 @@ class ControllerInformationPvnmTestimonials extends Controller {
 
 			foreach ($products_data as $product) {
 				$products[] = array(
-					'product_id' => $product['product_id'],
-					'image'      => $this->model_tool_image->resize($product['image'], 50, 50),
-					'name'       => $product['name'],
-					'model'      => $product['model'],
-					'quantity'   => $product['quantity'],
-					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id'])
+					'product_id'	=> $product['product_id'],
+					'image'				=> $this->model_tool_image->resize($product['image'], 50, 50),
+					'name'				=> $product['name'],
+					'model'				=> $product['model'],
+					'quantity'		=> $product['quantity'],
+					'href'				=> $this->url->link('product/product', 'product_id=' . $product['product_id'])
 				);
 			}
 
 			$data['testimonials'][] = array(
-				'testimonial_id' => (int)$result['testimonial_id'],
-				'customer_id'    => (int)$result['customer_id'],
-				'order_id'       => (int)$result['order_id'],
-				'author'         => $author,
-				'date_added'     => date('d.m.Y', strtotime($result['date_added'])),
-				'rating'         => (int)$result['rating'],
-				'rating_name'    => $data['text_star' . $result['rating']],
-				'products'       => $products,
-				'city'           => $result['city'],
-				'shipping'       => $result['shipping'],
-				'plus'           => html_entity_decode($result['plus'], ENT_QUOTES, 'UTF-8'),
-				'minus'          => html_entity_decode($result['minus'], ENT_QUOTES, 'UTF-8'),
-				'comment'        => html_entity_decode($result['comment'], ENT_QUOTES, 'UTF-8'),
-				'answer'         => html_entity_decode($result['answer'], ENT_QUOTES, 'UTF-8'),
-				'vote_status'    => $vote_status,
-				'vote_yes'       => $vote_yes,
-				'vote_no'        => $vote_no
+				'testimonial_id'	=> (int)$result['testimonial_id'],
+				'customer_id'			=> (int)$result['customer_id'],
+				'order_id'				=> (int)$result['order_id'],
+				'author'					=> $author,
+				'date_added'			=> date('d.m.Y', strtotime($result['date_added'])),
+				'rating'					=> (int)$result['rating'],
+				'rating_name'			=> $data['text_star' . $result['rating']],
+				'products'				=> $products,
+				'city'						=> $result['city'],
+				'shipping'				=> $result['shipping'],
+				'plus'						=> html_entity_decode($result['plus'], ENT_QUOTES, 'UTF-8'),
+				'minus'						=> html_entity_decode($result['minus'], ENT_QUOTES, 'UTF-8'),
+				'comment'					=> html_entity_decode($result['comment'], ENT_QUOTES, 'UTF-8'),
+				'answer'					=> html_entity_decode($result['answer'], ENT_QUOTES, 'UTF-8'),
+				'vote_status'			=> $vote_status,
+				'vote_yes'				=> $vote_yes,
+				'vote_no'					=> $vote_no
 			);
 		}
 
@@ -389,7 +390,7 @@ class ControllerInformationPvnmTestimonials extends Controller {
 
 		if (isset($this->request->get['rating'])) {
 			$url .= '&rating=' . $this->request->get['rating'];
-			
+
 			$testimonials['total'] = count($testimonials_ratings[$this->request->get['rating']]);
 		}
 
@@ -522,15 +523,15 @@ class ControllerInformationPvnmTestimonials extends Controller {
 				}
 
 				$post_data = array(
-					'customer_id' => $this->customer->getId(),
-					'order_id'    => $this->request->post['order_id'],
-					'city'        => $this->request->post['city'],
-					'shipping'    => $this->request->post['shipping'],
-					'rating'      => $this->request->post['rating'],
-					'comment'     => $this->request->post['comment'],
-					'plus'        => $this->request->post['plus'],
-					'minus'       => $this->request->post['minus'],
-					'status'      => $status
+					'customer_id'       => $this->customer->getId(),
+					'order_id'        	=> $this->request->post['order_id'],
+					'city'              => $this->request->post['city'],
+					'shipping'          => $this->request->post['shipping'],
+					'rating'            => $this->request->post['rating'],
+					'comment'           => $this->request->post['comment'],
+					'plus'              => $this->request->post['plus'],
+					'minus'             => $this->request->post['minus'],
+					'status'            => $status
 				);
 
 				$this->model_module_pvnm_testimonials->addTestimonial($post_data);
@@ -569,11 +570,11 @@ class ControllerInformationPvnmTestimonials extends Controller {
 				}
 
 				$post_data = array(
-					'testimonial_id' => $this->request->post['testimonial_id'], 
-					'customer_id'    => $this->customer->getId(),
-					'type'           => $this->request->post['type'],
-					'ip'             => $this->request->server['REMOTE_ADDR'],
-					'status'         => $status
+					'testimonial_id'	=> $this->request->post['testimonial_id'], 
+					'customer_id'			=> $this->customer->getId(),
+					'type'						=> $this->request->post['type'],
+					'ip'							=> $this->request->server['REMOTE_ADDR'],
+					'status'					=> $status
 				);
 
 				$this->model_module_pvnm_testimonials->addVote($post_data);

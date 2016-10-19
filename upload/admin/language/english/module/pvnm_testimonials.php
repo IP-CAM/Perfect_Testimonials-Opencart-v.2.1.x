@@ -9,12 +9,13 @@ $_['heading_title_votes']     = 'Votes';
 $_['tab_settings']       	  = 'Settings';
 $_['tab_general']       	  = 'General';
 $_['tab_email']       	 	  = 'Email';
+$_['tab_coupons']									= 'Coupons';
 $_['tab_help']       	 	  = 'Help';
 
 // Text
 $_['text_module']       	  = 'Modules';
+$_['text_edit']										= 'Edit Module';
 $_['text_success']     		  = 'Success: You have modified module!';
-$_['text_edit']       		  = 'Edit Module';
 $_['text_documentation']	  = 'Documentation';
 $_['text_developer']    	  = 'Developer';
 $_['text_none']          	  = 'No';
@@ -33,6 +34,17 @@ $_['text_store_url']          = 'Store name with url';
 $_['text_store_logo']         = 'Store logo';
 $_['text_customer']           = 'Customer name';
 $_['text_testimonials']       = 'Perfect Testimonials url';
+$_['text_coupon']									= 'Generated Coupon Code';
+$_['text_percent']								= 'Percentage';
+$_['text_amount']									= 'Fixed Amount';
+$_['text_coupon_name']						= 'Coupon after Testimonial the Order #';
+$_['text_info_t']									= 'Testimonials';
+$_['text_info_t_all']							= 'All Testimonials';
+$_['text_info_t_unanswered']			= 'Unanswered';
+$_['text_info_t_new']							= 'New Testimonials';
+$_['text_info_v']									= 'Votes';
+$_['text_info_v_all']							= 'All Votes';
+$_['text_info_v_new']							= 'New Votes';
 
 // Button
 $_['button_testimonials']     = 'Testimonials';
@@ -56,6 +68,7 @@ $_['column_ip']          	  = 'IP';
 
 // Entry
 $_['entry_status']            = 'Status';
+$_['entry_informer']							= 'Admin Informer';
 $_['entry_approval']       	  = 'Testimonials Approval';
 $_['entry_limit']      		  = 'Testimonials per page';
 $_['entry_email']   		  = 'Admin E-Mail for notification';
@@ -81,7 +94,7 @@ $_['entry_meta_title'] 	      = 'Meta Tag Title';
 $_['entry_meta_keyword'] 	  = 'Meta Tag Keywords';
 $_['entry_meta_description']  = 'Meta Tag Description';
 $_['entry_description']       = 'Description';
-$_['entry_macros']            = 'Macroses';
+$_['entry_macros']								= 'Macros';
 $_['entry_alert_admin']       = 'New Testimonial Alert Mail';
 $_['entry_alert_publish']     = 'Notify Customer about published testimonial';
 $_['entry_alert_response']    = 'Notify Customer about added Store Answer';
@@ -89,6 +102,15 @@ $_['entry_customer_motivate'] = 'Motivate Customer Add Testimonial';
 $_['entry_customer_thanks']   = 'Thank Customer per Testimonial';
 $_['entry_subject']   		  = 'Subject';
 $_['entry_message']  		  = 'Message';
+$_['entry_coupons']								= 'Generate coupon after testimonial';
+$_['entry_coupon_type']						= 'Type';
+$_['entry_coupon_discount']				= 'Discount';
+$_['entry_coupon_total']					= 'Total Amount';
+$_['entry_coupon_shipping']				= 'Free Shipping';
+$_['entry_coupon_product']				= 'Products';
+$_['entry_coupon_category']				= 'Category';
+$_['entry_coupon_days']						= 'Days of action';
+$_['entry_coupon_uses']						= 'Uses Per Coupon';
 $_['entry_customer']          = 'Customer';
 $_['entry_order']        	  = 'Order Id';
 $_['entry_city']              = 'Shipping City';
