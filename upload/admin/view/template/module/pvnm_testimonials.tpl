@@ -60,20 +60,20 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-informer"><?php echo $entry_informer; ?></label>
-								<div class="col-sm-10">
-									<div class="btn-group" data-toggle="buttons">
-										<?php if ($pvnm_testimonials_informer) { ?>
-											<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_informer" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
-											<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_informer" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
-										<?php } else { ?>
-											<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_informer" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
-											<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_informer" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
-										<?php } ?>
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-informer"><?php echo $entry_informer; ?></label>
+									<div class="col-sm-10">
+										<div class="btn-group" data-toggle="buttons">
+											<?php if ($pvnm_testimonials_informer) { ?>
+												<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_informer" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
+												<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_informer" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
+											<?php } else { ?>
+												<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_informer" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
+												<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_informer" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
+											<?php } ?>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="form-group">
+								<div class="form-group">
 								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-order-statuses"><?php echo $entry_order_statuses; ?></label>
 								<div class="col-sm-10">
 									<div class="well well-sm" style="height: 150px; overflow: auto;">
@@ -369,32 +369,32 @@
 								<label class="col-sm-2 control-label"><?php echo $entry_macros; ?></label>
 								<div class="col-sm-10">
 									<div class="panel panel-default">
-									<table class="table">
-										<tr>
-											<td>{store_name}</td>
-											<td><?php echo $text_store_name; ?></td>
-										</tr>
-										<tr>
-											<td>{store_url}</td>
-											<td><?php echo $text_store_url; ?></td>
-										</tr>
-										<tr>
-											<td>{store_logo}</td>
-											<td><?php echo $text_store_logo; ?></td>
-										</tr>
-										<tr>
-											<td>{testimonials}</td>
-											<td><?php echo $text_testimonials; ?></td>
-										</tr>
-										<tr>
-											<td>{customer}</td>
-											<td><?php echo $text_customer; ?></td>
-										</tr>
-										<tr>
-											<td>{coupon}</td>
-											<td><?php echo $text_coupon; ?></td>
-										</tr>
-									</table>
+										<table class="table">
+											<tr>
+												<td>{store_name}</td>
+												<td><?php echo $text_store_name; ?></td>
+											</tr>
+											<tr>
+												<td>{store_url}</td>
+												<td><?php echo $text_store_url; ?></td>
+											</tr>
+											<tr>
+												<td>{store_logo}</td>
+												<td><?php echo $text_store_logo; ?></td>
+											</tr>
+											<tr>
+												<td>{testimonials}</td>
+												<td><?php echo $text_testimonials; ?></td>
+											</tr>
+												<tr>
+												<td>{customer}</td>
+												<td><?php echo $text_customer; ?></td>
+											</tr>
+											<tr>
+												<td>{coupon}</td>
+												<td><?php echo $text_coupon; ?></td>
+											</tr>
+										</table>
 									</div>
 								</div>
 							</div>
@@ -584,95 +584,95 @@
 								<?php } ?>
 							</div>
 						</div>
-						<div class="tab-pane" id="tab-coupons">
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupons"><?php echo $entry_coupons; ?></label>
-								<div class="col-sm-10">
-									<div class="btn-group" data-toggle="buttons">
-										<?php if ($pvnm_testimonials_coupons) { ?>
-											<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_coupons" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
-											<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_coupons" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
-										<?php } else { ?>
-											<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_coupons" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
-											<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_coupons" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
-										<?php } ?>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-type"><?php echo $entry_coupon_type; ?></label>
-								<div class="col-sm-10">
-									<select name="pvnm_testimonials_coupon_type" id="input-pvnm-testimonials-coupon-type" class="form-control">
-										<option value="P" <?php if ($pvnm_testimonials_coupon_type == 'P') { ?>selected="selected"<?php } ?>><?php echo $text_percent; ?></option>
-										<option value="F" <?php if ($pvnm_testimonials_coupon_type == 'F') { ?>selected="selected"<?php } ?>><?php echo $text_amount; ?></option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-discount"><?php echo $entry_coupon_discount; ?></label>
-								<div class="col-sm-10">
-									<input type="text" name="pvnm_testimonials_coupon_discount" value="<?php echo $pvnm_testimonials_coupon_discount; ?>" placeholder="<?php echo $entry_coupon_discount; ?>" id="input-pvnm-testimonials-coupon-discount" class="form-control" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-total"><?php echo $entry_coupon_total; ?></label>
-								<div class="col-sm-10">
-									<input type="text" name="pvnm_testimonials_coupon_total" value="<?php echo $pvnm_testimonials_coupon_total; ?>" placeholder="<?php echo $entry_coupon_total; ?>" id="input-pvnm-testimonials-coupon-total" class="form-control" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-shipping"><?php echo $entry_coupon_shipping; ?></label>
-								<div class="col-sm-10">
-									<div class="btn-group" data-toggle="buttons">
-										<?php if ($pvnm_testimonials_coupon_shipping) { ?>
-											<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_coupon_shipping" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
-											<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_coupon_shipping" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
-										<?php } else { ?>
-											<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_coupon_shipping" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
-											<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_coupon_shipping" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
-										<?php } ?>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-product"><?php echo $entry_coupon_product; ?></label>
-								<div class="col-sm-10">
-									<input type="text" name="product" value="" placeholder="<?php echo $entry_coupon_product; ?>" id="input-pvnm-testimonials-coupon-product" class="form-control" />
-									<div id="coupon-product" class="well well-sm">
-										<?php foreach ($pvnm_testimonials_coupon_product as $coupon_product) { ?>
-										<div id="coupon-product<?php echo $coupon_product['product_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $coupon_product['name']; ?>
-											<input type="hidden" name="pvnm_testimonials_coupon_product[]" value="<?php echo $coupon_product['product_id']; ?>" />
+							<div class="tab-pane" id="tab-coupons">
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupons"><?php echo $entry_coupons; ?></label>
+									<div class="col-sm-10">
+										<div class="btn-group" data-toggle="buttons">
+											<?php if ($pvnm_testimonials_coupons) { ?>
+												<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_coupons" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
+												<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_coupons" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
+											<?php } else { ?>
+												<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_coupons" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
+												<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_coupons" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
+											<?php } ?>
 										</div>
-										<?php } ?>
 									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-category"><?php echo $entry_coupon_category; ?></label>
-								<div class="col-sm-10">
-									<input type="text" name="category" value="" placeholder="<?php echo $entry_coupon_category; ?>" id="input-pvnm-testimonials-coupon-category" class="form-control" />
-									<div id="coupon-category" class="well well-sm">
-										<?php foreach ($pvnm_testimonials_coupon_category as $coupon_category) { ?>
-										<div id="coupon-category<?php echo $coupon_category['category_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $coupon_category['name']; ?>
-											<input type="hidden" name="pvnm_testimonials_coupon_category[]" value="<?php echo $coupon_category['category_id']; ?>" />
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-type"><?php echo $entry_coupon_type; ?></label>
+									<div class="col-sm-10">
+										<select name="pvnm_testimonials_coupon_type" id="input-pvnm-testimonials-coupon-type" class="form-control">
+											<option value="P" <?php if ($pvnm_testimonials_coupon_type == 'P') { ?>selected="selected"<?php } ?>><?php echo $text_percent; ?></option>
+											<option value="F" <?php if ($pvnm_testimonials_coupon_type == 'F') { ?>selected="selected"<?php } ?>><?php echo $text_amount; ?></option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-discount"><?php echo $entry_coupon_discount; ?></label>
+									<div class="col-sm-10">
+										<input type="text" name="pvnm_testimonials_coupon_discount" value="<?php echo $pvnm_testimonials_coupon_discount; ?>" placeholder="<?php echo $entry_coupon_discount; ?>" id="input-pvnm-testimonials-coupon-discount" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-total"><?php echo $entry_coupon_total; ?></label>
+									<div class="col-sm-10">
+										<input type="text" name="pvnm_testimonials_coupon_total" value="<?php echo $pvnm_testimonials_coupon_total; ?>" placeholder="<?php echo $entry_coupon_total; ?>" id="input-pvnm-testimonials-coupon-total" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-shipping"><?php echo $entry_coupon_shipping; ?></label>
+									<div class="col-sm-10">
+										<div class="btn-group" data-toggle="buttons">
+											<?php if ($pvnm_testimonials_coupon_shipping) { ?>
+												<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_coupon_shipping" value="1" autocomplete="off" checked="checked"><?php echo $text_enabled; ?></label>
+												<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_coupon_shipping" value="0" autocomplete="off"><?php echo $text_disabled; ?></label>
+											<?php } else { ?>
+												<label class="btn btn-info"><input type="radio" name="pvnm_testimonials_coupon_shipping" value="1" autocomplete="off"><?php echo $text_enabled; ?></label>
+												<label class="btn btn-info active"><input type="radio" name="pvnm_testimonials_coupon_shipping" value="0" autocomplete="off" checked="checked"><?php echo $text_disabled; ?></label>
+											<?php } ?>
 										</div>
-										<?php } ?>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-product"><?php echo $entry_coupon_product; ?></label>
+									<div class="col-sm-10">
+										<input type="text" name="product" value="" placeholder="<?php echo $entry_coupon_product; ?>" id="input-pvnm-testimonials-coupon-product" class="form-control" />
+										<div id="coupon-product" class="well well-sm">
+											<?php foreach ($pvnm_testimonials_coupon_product as $coupon_product) { ?>
+											<div id="coupon-product<?php echo $coupon_product['product_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $coupon_product['name']; ?>
+												<input type="hidden" name="pvnm_testimonials_coupon_product[]" value="<?php echo $coupon_product['product_id']; ?>" />
+											</div>
+											<?php } ?>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-category"><?php echo $entry_coupon_category; ?></label>
+									<div class="col-sm-10">
+										<input type="text" name="category" value="" placeholder="<?php echo $entry_coupon_category; ?>" id="input-pvnm-testimonials-coupon-category" class="form-control" />
+										<div id="coupon-category" class="well well-sm">
+											<?php foreach ($pvnm_testimonials_coupon_category as $coupon_category) { ?>
+											<div id="coupon-category<?php echo $coupon_category['category_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $coupon_category['name']; ?>
+												<input type="hidden" name="pvnm_testimonials_coupon_category[]" value="<?php echo $coupon_category['category_id']; ?>" />
+											</div>
+											<?php } ?>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-days"><?php echo $entry_coupon_days; ?></label>
+									<div class="col-sm-10">
+										<input type="text" name="pvnm_testimonials_coupon_days" value="<?php echo $pvnm_testimonials_coupon_days; ?>" placeholder="<?php echo $entry_coupon_days; ?>" id="input-pvnm-testimonials-coupon-days" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-uses"><?php echo $entry_coupon_uses; ?></label>
+									<div class="col-sm-10">
+										<input type="text" name="pvnm_testimonials_coupon_uses" value="<?php echo $pvnm_testimonials_coupon_uses; ?>" placeholder="<?php echo $entry_coupon_uses; ?>" id="input-pvnm-testimonials-coupon-uses" class="form-control" />
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-days"><?php echo $entry_coupon_days; ?></label>
-								<div class="col-sm-10">
-									<input type="text" name="pvnm_testimonials_coupon_days" value="<?php echo $pvnm_testimonials_coupon_days; ?>" placeholder="<?php echo $entry_coupon_days; ?>" id="input-pvnm-testimonials-coupon-days" class="form-control" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="input-pvnm-testimonials-coupon-uses"><?php echo $entry_coupon_uses; ?></label>
-								<div class="col-sm-10">
-									<input type="text" name="pvnm_testimonials_coupon_uses" value="<?php echo $pvnm_testimonials_coupon_uses; ?>" placeholder="<?php echo $entry_coupon_uses; ?>" id="input-pvnm-testimonials-coupon-uses" class="form-control" />
-								</div>
-							</div>
-						</div>
 						<div class="tab-pane" id="tab-help">
 							<div class="form-group">
 								<label class="col-sm-2 control-label"><?php echo $text_developer; ?></label>
@@ -691,9 +691,7 @@
 </div>
 <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
-	$('#input-pvnm-testimonials-description<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-alert-admin-message<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-alert-publish-message<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-alert-response-message<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-customer-motivate-message<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-customer-thanks-message<?php echo $language['language_id']; ?>').summernote({
-		height: 100
-	});
+$('#input-pvnm-testimonials-description<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-alert-admin-message<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-alert-publish-message<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-alert-response-message<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-customer-motivate-message<?php echo $language['language_id']; ?>, #input-pvnm-testimonials-customer-thanks-message<?php echo $language['language_id']; ?>').summernote({height: 100});
 <?php } ?>
 
 $('#language a:first').tab('show');

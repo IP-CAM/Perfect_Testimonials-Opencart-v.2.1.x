@@ -184,20 +184,20 @@ class ModelModulePvnmTestimonials extends Model {
 				$coupon = mt_rand(1000000, 9999999999) . $query->row['customer_id'];
 
 				$coupon_data = array(
-					'name'						=> $this->language->get('text_coupon_name') . $query->row['order_id'],
-					'code'						=> $coupon,
-					'discount'				=> $this->config->get('pvnm_testimonials_coupon_discount'),
-					'type'						=> $this->config->get('pvnm_testimonials_coupon_type'),
-					'total'						=> $this->config->get('pvnm_testimonials_coupon_total'),
-					'logged'					=> 1,
-					'shipping'				=> $this->config->get('pvnm_testimonials_coupon_shipping'),
-					'date_start'			=> date('Y-m-d'),
-					'date_end'				=> date('Y-m-d', strtotime('now +' . $this->config->get('pvnm_testimonials_coupon_days') . ' days')),
-					'uses_total'			=> $this->config->get('pvnm_testimonials_coupon_uses'),
-					'uses_customer'		=> $this->config->get('pvnm_testimonials_coupon_uses'),
-					'status'					=> 1,
-					'coupon_product'	=> $this->config->get('pvnm_testimonials_coupon_product'),
-					'coupon_category'	=> $this->config->get('pvnm_testimonials_coupon_category')
+					'name'            => $this->language->get('text_coupon_name') . $query->row['order_id'],
+					'code'            => $coupon,
+					'discount'        => $this->config->get('pvnm_testimonials_coupon_discount'),
+					'type'            => $this->config->get('pvnm_testimonials_coupon_type'),
+					'total'           => $this->config->get('pvnm_testimonials_coupon_total'),
+					'logged'          => 1,
+					'shipping'        => $this->config->get('pvnm_testimonials_coupon_shipping'),
+					'date_start'      => date('Y-m-d'),
+					'date_end'        => date('Y-m-d', strtotime('now +' . $this->config->get('pvnm_testimonials_coupon_days') . ' days')),
+					'uses_total'      => $this->config->get('pvnm_testimonials_coupon_uses'),
+					'uses_customer'   => $this->config->get('pvnm_testimonials_coupon_uses'),
+					'status'          => 1,
+					'coupon_product'  => $this->config->get('pvnm_testimonials_coupon_product'),
+					'coupon_category' => $this->config->get('pvnm_testimonials_coupon_category')
 				);
 
 				$this->model_marketing_coupon->addCoupon($coupon_data);
@@ -215,12 +215,12 @@ class ModelModulePvnmTestimonials extends Model {
 			);
 
 			$output = array(
-				'store_name'		=> $this->config->get('config_name'),
-				'store_url'			=> '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
-				'store_logo'		=> '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
-				'customer'			=> $query->row['customer'],
-				'testimonials' 	=> '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>',
-				'coupon'				=> $coupon
+				'store_name'   => $this->config->get('config_name'),
+				'store_url'    => '<a href="' . HTTP_SERVER . '">' . $this->config->get('config_name') . '</a>',
+				'store_logo'   => '<a href="' . HTTP_SERVER . '"><img src="' . HTTP_SERVER . 'image/' . $this->config->get('config_logo') . '" / ></a>',
+				'customer'     => $query->row['customer'],
+				'testimonials' => '<a href="' . $this->url->link('information/pvnm_testimonials') . '">' . $testimonials_name[(int)$this->config->get('config_language_id')]['name'] . '</a>',
+				'coupon'       => $coupon
 			);
 
 			$customer_thanks_subject = $this->config->get('pvnm_testimonials_customer_thanks_subject');

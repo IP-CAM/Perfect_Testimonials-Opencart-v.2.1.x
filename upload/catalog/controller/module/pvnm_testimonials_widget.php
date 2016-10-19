@@ -56,11 +56,11 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 
 				if ($setting['testimonials_status']) {
 					$filter_data = array(
-						'rating'		=> '',
-						'sort'			=> 't.' . $setting['sort'],
-						'order'			=> 'DESC',
-						'start'			=> 0,
-						'limit'			=> $setting['testimonials_limit']
+						'rating' => '',
+						'sort'   => 't.' . $setting['sort'],
+						'order'  => 'DESC',
+						'start'  => 0,
+						'limit'  => $setting['testimonials_limit']
 					);
 
 					$results = $this->model_module_pvnm_testimonials->getTestimonials($filter_data);
@@ -73,12 +73,12 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 						}
 
 						$data['testimonials'][] = array(
-							'testimonial_id'	=> (int)$result['testimonial_id'],
-							'author'					=> $author,
-							'rating'					=> (int)$result['rating'],
-							'plus'						=> html_entity_decode($result['plus'], ENT_QUOTES, 'UTF-8'),
-							'minus'						=> html_entity_decode($result['minus'], ENT_QUOTES, 'UTF-8'),
-							'comment'					=> html_entity_decode($result['comment'], ENT_QUOTES, 'UTF-8')
+							'testimonial_id' => $result['testimonial_id'],
+							'author'         => $author,
+							'rating'         => $result['rating'],
+							'plus'           => html_entity_decode($result['plus'], ENT_QUOTES, 'UTF-8'),
+							'minus'          => html_entity_decode($result['minus'], ENT_QUOTES, 'UTF-8'),
+							'comment'        => html_entity_decode($result['comment'], ENT_QUOTES, 'UTF-8')
 						);
 					}
 				}

@@ -5,10 +5,15 @@ class ControllerModulePvnmTestimonials extends Controller {
 	public function index() {
 		$this->load->language('module/pvnm_testimonials');
 
-		$this->document->setTitle($this->language->get('heading_title'));
-
 		$this->load->model('module/pvnm_testimonials');
 		$this->load->model('setting/setting');
+		$this->load->model('catalog/product');
+		$this->load->model('catalog/category');
+		$this->load->model('localisation/order_status');
+		$this->load->model('extension/extension');
+		$this->load->model('localisation/language');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate_modify()) {
 			if (isset($this->request->post['pvnm_testimonials_keyword']) && trim($this->request->post['pvnm_testimonials_keyword']) == '') {
@@ -404,8 +409,6 @@ class ControllerModulePvnmTestimonials extends Controller {
 			$products = array();
 		}
 
-		$this->load->model('catalog/product');
-
 		$data['pvnm_testimonials_coupon_product'] = array();
 
 		foreach ($products as $product_id) {
@@ -426,8 +429,6 @@ class ControllerModulePvnmTestimonials extends Controller {
 		} else {
 			$categories = array();
 		}
-
-		$this->load->model('catalog/category');
 
 		$data['pvnm_testimonials_coupon_category'] = array();
 
@@ -454,11 +455,7 @@ class ControllerModulePvnmTestimonials extends Controller {
 			$data['pvnm_testimonials_coupon_uses'] = $this->config->get('pvnm_testimonials_coupon_uses');
 		}
 
-		$this->load->model('localisation/order_status');
-
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
-
-		$this->load->model('extension/extension');
 
 		$data['captchas'] = array();
 
@@ -475,8 +472,6 @@ class ControllerModulePvnmTestimonials extends Controller {
 			}
 		}
 
-		$this->load->model('localisation/language');
-
 		$data['token'] = $this->session->data['token'];
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
@@ -490,9 +485,9 @@ class ControllerModulePvnmTestimonials extends Controller {
 	public function testimonials() {
 		$this->load->language('module/pvnm_testimonials');
 
-		$this->document->setTitle($this->language->get('heading_title'));
-
 		$this->load->model('module/pvnm_testimonials');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (isset($this->request->get['filter_date_added'])) {
 			$filter_date_added = $this->request->get['filter_date_added'];
@@ -1025,9 +1020,9 @@ class ControllerModulePvnmTestimonials extends Controller {
 	public function votes() {
 		$this->load->language('module/pvnm_testimonials');
 
-		$this->document->setTitle($this->language->get('heading_title'));
-
 		$this->load->model('module/pvnm_testimonials');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (isset($this->request->get['filter_date_added'])) {
 			$filter_date_added = $this->request->get['filter_date_added'];

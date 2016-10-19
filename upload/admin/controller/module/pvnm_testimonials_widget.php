@@ -5,10 +5,10 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 	public function index() {
 		$this->load->language('module/pvnm_testimonials_widget');
 
-		$this->document->setTitle($this->language->get('heading_title'));
-
 		$this->load->model('extension/module');
 		$this->load->model('localisation/language');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			if (!empty($this->request->post['module'])) {
