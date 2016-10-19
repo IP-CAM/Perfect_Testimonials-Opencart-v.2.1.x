@@ -23,7 +23,7 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 			$data['rating_stars'] = 0;
 			$data['testimonials'] = array();
 
-			$cache_data = $this->cache->get('pvnm_testimonials_widget.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id'). '.' . (int)$data['module_id']);
+			$cache_data = $this->cache->get('pvnm.s.e.m.pvnm_testimonials_widget.' . (int)$this->config->get('config_store_id') . '.' . (int)$this->config->get('config_language_id') . '.' . (int)$data['module_id']);
 
 			if ($cache_data && $setting['cache']) {
 				$data['rating_text'] = $cache_data['rating_text'];
@@ -88,9 +88,9 @@ class ControllerModulePvnmTestimonialsWidget extends Controller {
 					$data['module']['rating_stars'] = $data['rating_stars'];
 					$data['module']['testimonials'] = $data['testimonials'];
 
-					$this->cache->set('pvnm_testimonials_widget.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$data['module_id'], $data['module']);
+					$this->cache->set('pvnm.s.e.m.pvnm_testimonials_widget.' . (int)$this->config->get('config_store_id') . '.' . (int)$this->config->get('config_language_id') . '.' . (int)$data['module_id'], $data['module']);
 				} else {
-					$this->cache->delete('pvnm_testimonials_widget.' . (int)$this->config->get('config_language_id') . '.' . (int)$this->config->get('config_store_id') . '.' . (int)$data['module_id']);
+					$this->cache->delete('pvnm.s.e.m.pvnm_testimonials_widget.' . (int)$this->config->get('config_store_id') . '.' . (int)$this->config->get('config_language_id') . '.' . (int)$data['module_id']);
 				}
 			}
 

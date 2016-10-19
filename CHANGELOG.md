@@ -1,5 +1,8 @@
 # Changelog
 
+#### 1.2.3
+- Support for cache pvnm_optimizer
+
 #### 1.2.2
 - Correction translations
 - Code refactoring
